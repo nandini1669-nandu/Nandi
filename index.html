@@ -3,119 +3,150 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Priya's Birthday Pass 🎫</title>
+  <title>The Official Priya Experience 🎂</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; }
-    body { background: #0d0d11; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
+    :root {
+      --primary: #ff3b6f;
+      --accent: #ffd166;
+      --bg: #0d0f17;
+      --card: #16192b;
+      --text: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 15px; overflow-x: hidden; }
 
-    .story-card { width: 100%; max-width: 380px; height: 650px; background: linear-gradient(135deg, #1f1c2c, #928dab); border-radius: 24px; padding: 25px; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 2px solid rgba(255,255,255,0.1); }
-    
-    /* Progress Bar */
-    .progress-bar { display: flex; gap: 6px; margin-bottom: 20px; }
-    .progress-step { flex: 1; height: 4px; background: rgba(255,255,255,0.3); border-radius: 2px; }
-    .progress-step.active { background: #ff477e; box-shadow: 0 0 10px #ff477e; }
+    .app-container { width: 100%; max-width: 440px; background: var(--card); border-radius: 28px; padding: 25px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.08); position: relative; overflow: hidden; }
 
-    /* Content Slides */
-    .slide { display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; height: 100%; animation: fadeIn 0.4s ease-in-out; }
-    .slide.active { display: flex; }
+    .section { display: none; flex-direction: column; align-items: center; text-align: center; animation: slideUp 0.4s ease; }
+    .section.active { display: flex; }
 
-    @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    h1 { font-size: 1.8rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-    p { font-size: 1.1rem; line-height: 1.5; color: #f0f0f0; margin-bottom: 20px; }
+    h1 { font-size: 1.8rem; margin-bottom: 10px; color: var(--accent); }
+    h2 { font-size: 1.3rem; margin-bottom: 15px; color: #fff; }
+    p { font-size: 0.95rem; line-height: 1.5; color: #a0a5c0; margin-bottom: 20px; }
 
-    /* Meme Box & Buttons */
-    .box { background: rgba(0,0,0,0.4); border: 2px dashed #ff477e; padding: 15px; border-radius: 16px; margin: 15px 0; width: 100%; }
-    .btn { background: #ff477e; color: white; border: none; padding: 14px 28px; border-radius: 50px; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 71, 126, 0.4); width: 100%; transition: 0.2s; }
-    .btn:active { transform: scale(0.95); }
+    .btn { background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 50px; font-weight: bold; font-size: 1rem; width: 100%; margin-top: 10px; cursor: pointer; transition: 0.2s; box-shadow: 0 8px 20px rgba(255, 59, 111, 0.3); }
+    .btn:active { transform: scale(0.96); }
 
-    .tag { display: inline-block; background: #ffeaa7; color: #000; font-weight: bold; padding: 5px 12px; border-radius: 12px; margin: 4px; font-size: 0.9rem; transform: rotate(-2deg); }
-    .tag:nth-child(even) { transform: rotate(3deg); background: #ff7675; color: white; }
+    /* Interactive Games */
+    .balloon-grid { display: flex; gap: 15px; margin: 20px 0; }
+    .balloon { font-size: 3rem; cursor: pointer; transition: 0.2s; user-select: none; }
+    .balloon:hover { transform: scale(1.2); }
+
+    .cake { font-size: 5rem; cursor: pointer; margin: 15px 0; position: relative; display: inline-block; }
+    .candle { position: absolute; top: -10px; left: 42%; font-size: 1.8rem; animation: flicker 0.8s infinite alternate; }
+    @keyframes flicker { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0.6; transform: scale(0.9); } }
+
+    .option-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); padding: 12px; border-radius: 14px; width: 100%; margin-bottom: 8px; color: #fff; font-size: 0.9rem; text-align: left; cursor: pointer; }
+    .option-btn:hover { background: rgba(255, 59, 111, 0.2); border-color: var(--primary); }
+
+    /* Player styling */
+    .music-bar { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.5); padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 6px; }
   </style>
 </head>
 <body>
 
-  <div class="story-card">
-    <!-- Progress Indicator -->
-    <div class="progress-bar">
-      <div class="progress-step active" id="p1"></div>
-      <div class="progress-step" id="p2"></div>
-      <div class="progress-step" id="p3"></div>
+  <div class="app-container">
+    <div class="music-bar">
+      <span>🎵</span> <span id="music-status">Bollywood Vibe Playing</span>
     </div>
 
-    <!-- SLIDE 1: The Warning -->
-    <div class="slide active" id="slide1">
-      <div style="font-size: 4rem;">🚨</div>
-      <h1>HOLD UP PRIYA!</h1>
-      <p>Is page par aage badhne se pehle Identity Verification zaroori hai.</p>
+    <!-- Audio Element -->
+    <audio id="bgAudio" loop preload="auto">
+      <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- STAGE 1: Entrance Mini-Game -->
+    <div class="section active" id="stage1">
+      <div style="font-size: 3.5rem; margin-bottom: 10px;">🎈</div>
+      <h1>Welcome, Priya!</h1>
+      <p>Aise hi direct birthday wish nahi milegi! Pehle screen par saare **Balloons Pop** kar aur energy unlock kar!</p>
+
+      <div class="balloon-grid">
+        <span class="balloon" onclick="popBalloon(this)">🎈</span>
+        <span class="balloon" onclick="popBalloon(this)">🎈</span>
+        <span class="balloon" onclick="popBalloon(this)">🎈</span>
+        <span class="balloon" onclick="popBalloon(this)">🎈</span>
+      </div>
+      <p id="popCount" style="font-size:0.85rem; color:var(--accent);">Popped: 0 / 4</p>
+    </div>
+
+    <!-- STAGE 2: Adult-Bestie Quiz -->
+    <div class="section" id="stage2">
+      <h2>🧠 Bestie Chemistry Quiz</h2>
+      <p>System check: Tu real Priya hai ya duplicate?</p>
       
-      <div class="box">
-        <p style="margin:0; font-weight:bold;">Sahi option select kar 👇</p>
-      </div>
-
-      <button class="btn" onclick="nextSlide(2)">Main Coffee Addict + Gym Freak Priya hu ☕🏋️‍♀️</button>
-      <button class="btn" style="background:#444; margin-top:10px;" onclick="alert('Jhooth mat bol! Sahi button daba 😜')">Main Ek Normal Insan Hu 🗿</button>
+      <p style="text-align:left; color:#fff; width:100%; margin-bottom:8px;">Q: Tera sabse bada super-power kya hai?</p>
+      <button class="option-btn" onclick="nextStage(3)">A) Extreme Coffee Addiction ☕</button>
+      <button class="option-btn" onclick="nextStage(3)">B) Full Fitness/Gym Focus 🏋️‍♀️</button>
+      <button class="option-btn" onclick="nextStage(3)">C) Slaying High Fashion & Art 🎨</button>
+      <button class="option-btn" onclick="nextStage(3)">D) All of the above with 100% Drama 🔥</button>
     </div>
 
-    <!-- SLIDE 2: The Roast & Vibe Check -->
-    <div class="slide" id="slide2">
-      <div style="font-size: 3.5rem;">💅</div>
-      <h1>Vibe Check Passed!</h1>
-      <p>System analysis according to data:</p>
-      
-      <div style="margin: 15px 0;">
-        <span class="tag">🎨 Full-Time Artist</span>
-        <span class="tag">👗 Fashionista Diva</span>
-        <span class="tag">🌶️ Sweet & Spicy</span>
-        <span class="tag">⚡ Live In The Moment</span>
-        <span class="tag">☕ 99% Coffee Battery</span>
+    <!-- STAGE 3: Cake Cutting Ritual -->
+    <div class="section" id="stage3">
+      <h2>🎂 Virtual Cake Cutting</h2>
+      <p>Candle par **Tap / Blow** kar ke wish maang aur cake cut kar!</p>
+
+      <div class="cake" onclick="cutCake()">
+        <span class="candle" id="flame">🔥</span>
+        🎂
       </div>
 
-      <div class="box">
-        <p style="margin:0; font-size: 0.95rem;">Diagnosis: Sabse over-dramatic aur best friend zone me top tier bandi! ✨</p>
-      </div>
-
-      <button class="btn" onclick="nextSlide(3)">Main Surprise Unlock Kar Rahi Hu 🎁</button>
+      <p style="font-size:0.8rem; color:var(--accent);">*Tap on the cake to blow candle & blast confetti!*</p>
     </div>
 
-    <!-- SLIDE 3: The Big Birthday Wish -->
-    <div class="slide" id="slide3">
-      <div style="font-size: 4rem;">🎂 🎉</div>
+    <!-- STAGE 4: Heartfelt Adult Wish -->
+    <div class="section" id="stage4">
+      <div style="font-size: 3rem;">✨ 🥂</div>
       <h1>HAPPY BIRTHDAY PRIYA!</h1>
-      
-      <p>Wishing you endless coffee, zero gym slumps, and a year full of aesthetics & pure chaotic energy!</p>
 
-      <div class="box" style="border-style: solid; background: rgba(255,255,255,0.1);">
-        <p style="margin:0; font-size:0.95rem; font-style:italic;">"Tere jaisi aesthetic aur insane friend ka hona blessing hai bhai. Keep shining & slaying! 🔥"</p>
-      </div>
+      <p style="text-align:left; background:rgba(255,255,255,0.03); padding:15px; border-radius:12px; border-left:3px solid var(--primary); font-size:0.9rem; line-height:1.6; color:#e0e0e0; margin-bottom:15px;">
+        To one of the most original, genuine, and multi-talented people I know! Fitness freak, trendsetter, artist, and a solid human being.<br><br>
+        Thank you for being that authentic friend who brings energy, taste, and good vibes everywhere. May this year bring you top-tier success, zero gym slumps, endless coffee, and unlimited happiness! Cheers to growing older, wiser, and stays iconic! 🥂💥
+      </p>
 
-      <button class="btn" onclick="triggerConfetti()" style="background:#00b894;">Blast Confetti 🎊</button>
+      <button class="btn" onclick="finalBlast()">Re-Blast Celebrations 🎊</button>
     </div>
   </div>
 
   <script>
-    function nextSlide(slideNumber) {
-      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.progress-step').forEach(p => p.classList.remove('active'));
+    let popped = 0;
+    const bgAudio = document.getElementById('bgAudio');
 
-      document.getElementById('slide' + slideNumber).classList.add('active');
+    function startMusic() {
+      bgAudio.play().catch(() => {});
+    }
+
+    function popBalloon(el) {
+      startMusic();
+      el.style.visibility = 'hidden';
+      popped++;
+      document.getElementById('popCount').innerText = `Popped: ${popped} / 4`;
       
-      for(let i=1; i<=slideNumber; i++){
-        document.getElementById('p' + i).classList.add('active');
-      }
+      confetti({ particleCount: 20, spread: 40, origin: { y: 0.8 } });
 
-      if(slideNumber === 3) {
-        triggerConfetti();
+      if (popped === 4) {
+        setTimeout(() => nextStage(2), 500);
       }
     }
 
-    function triggerConfetti() {
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
+    function nextStage(stageNum) {
+      startMusic();
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById('stage' + stageNum).classList.add('active');
+    }
+
+    function cutCake() {
+      document.getElementById('flame').style.display = 'none';
+      confetti({ particleCount: 150, spread: 90, origin: { y: 0.5 } });
+      setTimeout(() => nextStage(4), 1200);
+    }
+
+    function finalBlast() {
+      confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
     }
   </script>
 </body>
