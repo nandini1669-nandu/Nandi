@@ -198,7 +198,7 @@
     <div class="section active" id="slide1">
       <div style="font-size: 3rem; margin-bottom: 8px;">🌸✨</div>
       <h1>Happy Birthday!</h1>
-      <p>Low-key genius, fitness enthusiast & super chilled bestie! Ready for your surprise?</p>
+      <p>Super smart, low-key genius & gym freak! Ready for your surprise?</p>
       
       <div class="photo-frame" onclick="document.getElementById('photoInput').click()">
         <img id="userPhotoPreview" style="display:none;" />
@@ -209,24 +209,24 @@
       <button class="btn" onclick="startStory(2)">Panna Palto ➔</button>
     </div>
 
-    <!-- SLIDE 2: Twisted Quiz (Twisted & Banter options) -->
+    <!-- SLIDE 2: NEW TWISTED QUESTIONS -->
     <div class="section" id="slide2">
-      <h2>Guess Your Secret Quirks 🕵️‍♀️</h2>
+      <h2>Guess Your Secret Traits 🕵️‍♀️</h2>
       
       <div class="quiz-card">
-        <div class="quiz-question">1. Gym Routine vs Rest Days: True secret kya hai?</div>
+        <div class="quiz-question">1. Fitness dedication level kitna high hai?</div>
         <div class="quiz-options">
-          <div class="quiz-opt" onclick="checkQuiz(1, false, 'Haha galat! Rest day pe bhi gym ke thoughts aate hain!')">A) Daily rest aur aaram se chill karna</div>
-          <div class="quiz-opt" onclick="checkQuiz(1, true, 'Spot on! Gym skipped = Internal Discomfort! 🏋️‍♀️')">B) "Mera Gym timing non-negotiable hai!"</div>
+          <div class="quiz-opt" onclick="checkQuiz(1, false, 'Haha bilkul nahi! Gym ke time koi disturbance nahi chahiye!')">A) Lazily kabhi-kabhi exercise kar lena</div>
+          <div class="quiz-opt" onclick="checkQuiz(1, true, 'Sahi Pakde! Routine hit hona hi chahiye! 💪🔥')">B) "Gym ka time fix hai, no excuses allowed!"</div>
         </div>
         <div class="quiz-feedback" id="fb1"></div>
       </div>
 
       <div class="quiz-card">
-        <div class="quiz-question">2. Mysterious/Low-key rehne ka asli reason?</div>
+        <div class="quiz-question">2. Problem solving aur focus ka kya raaz hai?</div>
         <div class="quiz-options">
-          <div class="quiz-opt" onclick="checkQuiz(2, false, 'No way! Over-sharing bilkul pasand nahi hai!')">A) Sabko apni poori life story batana</div>
-          <div class="quiz-opt" onclick="checkQuiz(2, true, 'Sahi pakde! Quiet observer, full focus! 🧠✨')">B) Kam bolna, chupchap smart moves banana</div>
+          <div class="quiz-opt" onclick="checkQuiz(2, false, 'Galat answer! Panic toh door door tak nahi hota!')">A) Thoda sa tension lete hi panic kar jana</div>
+          <div class="quiz-opt" onclick="checkQuiz(2, true, 'Exactly! Extremely calm, composed & sharp mind! 🧠✨')">B) Quietly problem samajhna aur silently solve kar dena</div>
         </div>
         <div class="quiz-feedback" id="fb2"></div>
       </div>
@@ -238,7 +238,7 @@
     <div class="section" id="slide3">
       <div style="font-size: 2.2rem; margin-bottom: 5px;">🎈</div>
       <h2>Pop the Birthday Balloons!</h2>
-      <p>Celebration complete karne ke liye 3 balloons pop karo!</p>
+      <p>3 balloons pop karke aage badho:</p>
 
       <div class="balloon-area" id="balloonArea">
         <div class="balloon" id="b1" style="left: 15%; animation-delay: 0s;" onclick="popBalloon('b1')">🎈</div>
@@ -251,14 +251,14 @@
       <button class="btn" id="btnGameNext" style="display:none; margin-top:10px;" onclick="nextSlide(4)">Bestfriend Note Unlock ➔</button>
     </div>
 
-    <!-- SLIDE 4: Revised Bestfriend Note -->
+    <!-- SLIDE 4: REVISED BESTFRIEND NOTE -->
     <div class="section" id="slide4">
       <div style="font-size: 2.5rem; margin-bottom: 5px;">💌</div>
       <h2>Bestfriend Note</h2>
       
       <div class="note-box">
         <p style="color: #334155; font-size: 0.93rem; line-height: 1.8; margin: 0; font-weight: 500;">
-          Tere sath interact karke hamesha ek bohot hi sorted aur calm vibe milti hai. Jis tareeke se tu apni workout consistency, sharp focus aur discreet nature ko maintain karti hai, wo truly admirable hai! Thanks for being an incredible friend who makes conversations so easy and fun. Hope this year brings you everything you're silently grinding for! ✨💪🌸
+          Tere sath baate karna hamesha bohot easy, light aur comfortable lagta hai. Jis tarah tu apni gym consistency, sharp intelligence aur calm mindset ko balance karti hai, wo truly inspiring hai! Thanks for being such a sweet, reliable aur cool best friend. Wish you all the happiness, success aur unlimited good vibes this year! ✨🌸
         </p>
       </div>
 
@@ -272,14 +272,14 @@
 
       <div class="note-box" style="text-align: center; margin: 15px 0; background: #fff1f2; border-color: #fecdd3;">
         <p style="color: #334155; font-size: 0.93rem; line-height: 1.7; margin: 0; font-weight: 500;">
-          Wishing you a year filled with great health, PRs in the gym, clear goals, solved puzzles, and amazing food! Have a fantastic day ahead! 🎉✨
+          May this year bring you endless happiness, gym PRs, achievements, peace, and lots of delicious treats! Have the happiest birthday ahead! 🎉✨
         </p>
       </div>
 
       <button class="btn" onclick="triggerConfetti()">Celebrate Again 🎊</button>
     </div>
 
-    <div style="font-size:0.72rem; color:#94a3b8; margin-top:10px;">Bestfriend Edition • Aesthetic Soft Theme</div>
+    <div style="font-size:0.72rem; color:#94a3b8; margin-top:10px;">Bestfriend Edition • Soft Aesthetic</div>
   </div>
 
   <script>
@@ -290,7 +290,7 @@
     let poppedCount = 0;
     let quizSolved = { q1: false, q2: false };
 
-    // ORIGINAL FUN BIRTHDAY MELODY (Restored Original Upbeat Tune)
+    // Continuous Original Birthday Melody
     const melodyNotes = [
       261.63, 261.63, 293.66, 261.63, 349.23, 329.63,
       261.63, 261.63, 293.66, 261.63, 392.00, 349.23,
@@ -299,46 +299,62 @@
     ];
     let noteIdx = 0;
 
+    function initAudio() {
+      if(!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if(audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
     function playNote(freq) {
       try {
-        if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if(audioCtx.state === 'suspended') audioCtx.resume();
-
+        initAudio();
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-        osc.type = 'triangle'; // Original warm tone
+        osc.type = 'triangle';
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
         gain.gain.setValueAtTime(0.05, audioCtx.currentTime); 
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.45);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.5);
+        osc.stop(audioCtx.currentTime + 0.45);
       } catch(e) {}
     }
 
-    function toggleTune() {
+    function ensureMusicPlaying() {
       if(!isPlaying) {
         isPlaying = true;
         document.getElementById('musicText').innerText = "Playing Original Tune 🎶";
+        if(timerId) clearInterval(timerId);
         timerId = setInterval(() => {
           playNote(melodyNotes[noteIdx]);
           noteIdx = (noteIdx + 1) % melodyNotes.length;
         }, 300);
+      }
+    }
+
+    function toggleTune() {
+      if(!isPlaying) {
+        ensureMusicPlaying();
       } else {
         isPlaying = false;
         document.getElementById('musicText').innerText = "Original Birthday Tune";
-        clearInterval(timerId);
+        if(timerId) clearInterval(timerId);
       }
     }
 
     function startStory(slide) {
-      if(!isPlaying) toggleTune();
+      ensureMusicPlaying();
       nextSlide(slide);
     }
 
     function nextSlide(slideNum) {
+      ensureMusicPlaying(); // Keeps music active across ALL slides
       currentSlide = slideNum;
+
       for(let i = 1; i <= 5; i++) {
         const bar = document.getElementById('p' + i);
         if(bar) {
@@ -355,6 +371,7 @@
     }
 
     function checkQuiz(qNum, isCorrect, text) {
+      ensureMusicPlaying();
       const fb = document.getElementById('fb' + qNum);
       fb.innerText = text;
       
@@ -372,6 +389,7 @@
     }
 
     function popBalloon(id) {
+      ensureMusicPlaying();
       const b = document.getElementById(id);
       if(b.style.visibility === 'hidden') return;
 
