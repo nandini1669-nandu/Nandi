@@ -36,7 +36,7 @@
       box-shadow: 0 15px 35px rgba(0,0,0,0.08); 
       position: relative; 
       overflow: hidden; 
-      min-height: 560px; 
+      min-height: 580px; 
       display: flex; 
       flex-direction: column; 
       justify-content: center; 
@@ -112,12 +112,30 @@
     }
     .option-btn:hover { background: #fdf0ed; border-color: var(--accent); }
 
-    /* Cake */
+    /* Memory Timeline Box */
+    .timeline-box {
+      background: #faf8f5;
+      border: 1px solid #f0e6df;
+      padding: 15px;
+      border-radius: 16px;
+      text-align: left;
+      width: 100%;
+      margin: 10px 0;
+    }
+    .timeline-item {
+      display: flex;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    /* Cake & Candle */
     .cake { font-size: 5rem; cursor: pointer; margin: 15px 0; position: relative; display: inline-block; }
     .candle { position: absolute; top: -10px; left: 40%; font-size: 1.6rem; animation: float 1s infinite alternate; }
     @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-4px); } }
 
-    /* Shayari/Note Card */
+    /* Shayari Card */
     .note-card { 
       background: #fdf0ed; 
       border-left: 4px solid var(--accent); 
@@ -154,23 +172,28 @@
 
   <div class="app-container">
     <button class="music-btn" onclick="toggleMusic()">
-      <span id="musicIcon">🎵</span> <span id="musicText">Play Soft Music</span>
+      <span id="musicIcon">🎸</span> <span id="musicText">Play Acoustic Tune</span>
     </button>
+
+    <!-- High Quality Soft Guitar Audio Stream -->
+    <audio id="bgAudio" loop preload="auto">
+      <source src="https://assets.mixkit.co/music/preview/mixkit-acoustic-guitar-under-the-tree-1227.mp3" type="audio/mpeg">
+    </audio>
 
     <!-- SLIDE 1: Gentle Welcome & Tap to Reveal -->
     <div class="section active" id="slide1">
       <div style="font-size: 2.2rem; margin-bottom: 5px;">🌷</div>
       <h1>Hey Priya!</h1>
-      <p>Tumhare birthday ke liye ek chota sa surprise banaya hai. Niche diye envelope cards par tap karo!</p>
+      <p>Tumhare birthday ke liye ek chota sa surprise banaya hai. Niche diye envelopes par tap karo!</p>
 
       <div class="cards-grid">
-        <div class="card-box" onclick="popCard(1, 'Always bringing warmth & good vibes wherever you go! ✨')">
+        <div class="card-box" onclick="popCard(1, 'Always bringing warmth & positive vibes wherever you go! ✨')">
           ✉️
         </div>
         <div class="card-box" onclick="popCard(2, 'Super dependable, kind-hearted & grounded person! 🤍')">
           💌
         </div>
-        <div class="card-box" onclick="popCard(3, 'The one who quietly manages everything like a absolute rockstar! 🌸')">
+        <div class="card-box" onclick="popCard(3, 'The one who quietly manages everything like a rockstar! 🌸')">
           🎁
         </div>
       </div>
@@ -197,10 +220,17 @@
       <p id="quizError" style="color:#d9534f; font-size:0.85rem; display:none; margin-top:10px; font-weight:500; line-height:1.4;"></p>
     </div>
 
-    <!-- SLIDE 3: Genuine Friendship Shayari -->
+    <!-- SLIDE 3: Memory & Bestie Vibe Timeline (NEW IDEA) -->
     <div class="section" id="slide3">
       <div style="font-size: 2rem; margin-bottom: 5px;">📜</div>
-      <h2>Khaas Tumhare Liye...</h2>
+      <h2>Bestie Vibe Highlights ✨</h2>
+      <p>A few things that define your awesome personality:</p>
+
+      <div class="timeline-box">
+        <div class="timeline-item">☕ <b>100% Fueled:</b> Coffee & High Energy Mode</div>
+        <div class="timeline-item">🎨 <b>Aesthetic Soul:</b> Art, Fashion & Style on point</div>
+        <div class="timeline-item">🤍 <b>Pure Heart:</b> Always there for her people</div>
+      </div>
 
       <div class="note-card">
         "Dil se saaf aur baaton mein mithas ho tum,<br>
@@ -209,15 +239,13 @@
         Har din tumhara khoobsurat ho aur haseen ho har shaam."
       </div>
 
-      <p style="font-size:0.9rem;">Dost ho toh tum jaisi! Simple, sweet and truly genuine.</p>
-
       <button class="btn" onclick="nextSlide(4)">Cake Cut Karte Hain 🎂</button>
     </div>
 
     <!-- SLIDE 4: Virtual Cake Cutting -->
     <div class="section" id="slide4">
       <h2>🎂 Make a Wish!</h2>
-      <p>Candle bujhane aur surprise ke liye **Cake par tap karo**!</p>
+      <p>Candle bujhane aur final wish ke liye **Cake par tap karo**!</p>
 
       <div class="cake" onclick="cutCake()">
         <span class="candle" id="flame">🕯️</span>
@@ -245,62 +273,25 @@
 
   <script>
     let poppedCount = 0;
-    let audioCtx = null;
+    const bgAudio = document.getElementById('bgAudio');
     let isPlaying = false;
-    let musicInterval = null;
-
-    // Built-in Soft Synth Audio Player (Bypasses all link block issues)
-    function startSoftMusic() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-
-      const notes = [
-        261.63, 261.63, 293.66, 261.63, 349.23, 329.63,
-        261.63, 261.63, 293.66, 261.63, 392.00, 349.23,
-        261.63, 261.63, 523.25, 440.00, 349.23, 329.63, 293.66
-      ];
-      let step = 0;
-
-      isPlaying = true;
-      document.getElementById('musicText').innerText = "Music On 🎶";
-
-      musicInterval = setInterval(() => {
-        if (!isPlaying) return;
-        let osc = audioCtx.createOscillator();
-        let gain = audioCtx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(notes[step], audioCtx.currentTime);
-        
-        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.8);
-
-        step = (step + 1) % notes.length;
-      }, 500);
-    }
 
     function toggleMusic() {
-      if (!isPlaying) {
-        startSoftMusic();
+      if(!isPlaying) {
+        bgAudio.play().then(() => {
+          document.getElementById('musicText').innerText = "Music Playing 🎶";
+          isPlaying = true;
+        }).catch(e => console.log(e));
       } else {
+        bgAudio.pause();
+        document.getElementById('musicText').innerText = "Play Acoustic Tune";
         isPlaying = false;
-        clearInterval(musicInterval);
-        document.getElementById('musicText').innerText = "Play Soft Music";
       }
     }
 
     function ensureMusic() {
       if (!isPlaying) {
-        startSoftMusic();
+        toggleMusic();
       }
     }
 
@@ -344,12 +335,12 @@
     function cutCake() {
       ensureMusic();
       document.getElementById('flame').style.display = 'none';
-      confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 } });
+      confetti({ particleCount: 140, spread: 90, origin: { y: 0.5 } });
       setTimeout(() => nextSlide(5), 1000);
     }
 
     function triggerConfetti() {
-      confetti({ particleCount: 180, spread: 90, origin: { y: 0.6 } });
+      confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
     }
   </script>
 </body>
