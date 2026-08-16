@@ -3,21 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For Priya ✨</title>
+  <title>A Little Surprise for Priya ✨</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #fcf8f6;
+      --bg-start: #fff5f5;
+      --bg-end: #fed7aa;
       --card: #ffffff;
-      --accent: #e07a5f;
-      --primary: #3d405b;
-      --subtext: #6c757d;
-      --soft-pink: #f4a261;
+      --accent: #f43f5e;
+      --primary: #1e293b;
+      --subtext: #64748b;
+      --highlight: #fef08a;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
-      background: linear-gradient(135deg, #fefae0 0%, #f4acb7 100%); 
+      background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%); 
       color: var(--primary); 
       font-family: 'Plus Jakarta Sans', sans-serif;
       min-height: 100vh; 
@@ -31,28 +32,28 @@
       width: 100%; 
       max-width: 420px; 
       background: var(--card); 
-      border-radius: 24px; 
+      border-radius: 28px; 
       padding: 28px 22px; 
-      box-shadow: 0 15px 35px rgba(0,0,0,0.08); 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08); 
       position: relative; 
       overflow: hidden; 
-      min-height: 580px; 
+      min-height: 590px; 
       display: flex; 
       flex-direction: column; 
       justify-content: center; 
     }
 
-    .section { display: none; flex-direction: column; align-items: center; text-align: center; animation: fadeIn 0.5s ease; width: 100%; }
+    .section { display: none; flex-direction: column; align-items: center; text-align: center; animation: fadeIn 0.4s ease-out; width: 100%; }
     .section.active { display: flex; }
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
 
-    h1 { font-family: 'Caveat', cursive; font-size: 2.6rem; color: var(--accent); margin-bottom: 8px; font-weight: 600; }
-    h2 { font-size: 1.25rem; margin-bottom: 12px; color: var(--primary); font-weight: 600; }
-    p { font-size: 0.95rem; line-height: 1.6; color: var(--subtext); margin-bottom: 20px; }
+    h1 { font-family: 'Caveat', cursive; font-size: 2.8rem; color: var(--accent); margin-bottom: 6px; font-weight: 600; }
+    h2 { font-size: 1.3rem; margin-bottom: 10px; color: var(--primary); font-weight: 600; }
+    p { font-size: 0.93rem; line-height: 1.6; color: var(--subtext); margin-bottom: 18px; }
 
     .btn { 
-      background: var(--accent); 
+      background: linear-gradient(135deg, #f43f5e, #fb7185); 
       color: white; 
       border: none; 
       padding: 14px 24px; 
@@ -63,42 +64,43 @@
       margin-top: 10px; 
       cursor: pointer; 
       transition: all 0.2s ease;
-      box-shadow: 0 4px 15px rgba(224, 122, 95, 0.3);
+      box-shadow: 0 4px 15px rgba(244, 63, 94, 0.3);
     }
-    .btn:active { transform: scale(0.98); }
+    .btn:active { transform: scale(0.97); }
 
     /* Interactive Cards */
     .cards-grid { display: flex; gap: 10px; margin: 15px 0; width: 100%; }
     .card-box { 
-      background: #fdf0ed; 
-      border: 1px solid #f8d7da; 
+      background: #fff1f2; 
+      border: 1px dashed #fecdd3; 
       padding: 16px 10px; 
-      border-radius: 16px; 
+      border-radius: 18px; 
       cursor: pointer; 
       transition: 0.3s; 
       flex: 1; 
       font-size: 1.8rem;
     }
-    .card-box:hover { transform: translateY(-3px); background: #f9ebea; }
+    .card-box:hover { transform: translateY(-4px); background: #ffe4e6; }
 
     .surprise-text { 
-      background: #faf0ca; 
+      background: var(--highlight); 
       border-radius: 14px; 
       padding: 14px; 
       font-size: 0.9rem; 
-      color: #3d405b; 
+      color: #854d0e; 
       margin-top: 10px; 
-      min-height: 60px; 
+      min-height: 65px; 
       display: flex; 
       align-items: center; 
       justify-content: center;
       line-height: 1.5;
+      font-weight: 500;
     }
 
     /* Quiz Options */
     .option-btn { 
-      background: #f8f9fa; 
-      border: 1px solid #e9ecef; 
+      background: #f8fafc; 
+      border: 1px solid #e2e8f0; 
       padding: 13px 16px; 
       border-radius: 14px; 
       width: 100%; 
@@ -110,126 +112,123 @@
       transition: 0.2s; 
       font-weight: 500;
     }
-    .option-btn:hover { background: #fdf0ed; border-color: var(--accent); }
+    .option-btn:hover { background: #fff1f2; border-color: var(--accent); }
 
-    /* Memory Timeline Box */
-    .timeline-box {
-      background: #faf8f5;
-      border: 1px solid #f0e6df;
-      padding: 15px;
+    /* Magic Reveal Box */
+    .scratch-box {
+      background: #f1f5f9;
+      border: 2px dashed #cbd5e1;
+      padding: 16px;
       border-radius: 16px;
-      text-align: left;
+      cursor: pointer;
       width: 100%;
-      margin: 10px 0;
+      margin: 12px 0;
+      transition: 0.3s;
     }
-    .timeline-item {
-      display: flex;
-      gap: 10px;
-      font-size: 0.88rem;
-      color: var(--primary);
-      margin-bottom: 8px;
-    }
+    .scratch-box:hover { background: #e2e8f0; }
 
     /* Cake & Candle */
-    .cake { font-size: 5rem; cursor: pointer; margin: 15px 0; position: relative; display: inline-block; }
-    .candle { position: absolute; top: -10px; left: 40%; font-size: 1.6rem; animation: float 1s infinite alternate; }
-    @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-4px); } }
+    .cake { font-size: 5.2rem; cursor: pointer; margin: 15px 0; position: relative; display: inline-block; }
+    .candle { position: absolute; top: -12px; left: 40%; font-size: 1.6rem; animation: float 0.8s infinite alternate; }
+    @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-5px); } }
 
     /* Shayari Card */
     .note-card { 
-      background: #fdf0ed; 
+      background: #fff1f2; 
       border-left: 4px solid var(--accent); 
       padding: 18px; 
       border-radius: 12px; 
       font-style: italic; 
-      color: #3d405b; 
+      color: #334155; 
       font-size: 0.95rem; 
       line-height: 1.8; 
       margin: 15px 0; 
       text-align: left;
     }
 
-    /* Music Control */
+    /* Music Control Header */
     .music-btn { 
       position: absolute; 
       top: 18px; 
       right: 18px; 
-      background: #fdf0ed; 
-      padding: 6px 12px; 
+      background: #fff1f2; 
+      padding: 6px 14px; 
       border-radius: 20px; 
       font-size: 0.75rem; 
-      border: 1px solid #f8d7da; 
+      border: 1px solid #fecdd3; 
       color: var(--accent); 
       cursor: pointer; 
       font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
   </style>
 </head>
 <body>
 
+  <!-- Audio Element with High Quality Soft Track -->
+  <audio id="bgAudio" loop preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=soft-piano-10074.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="app-container">
     <button class="music-btn" onclick="toggleMusic()">
-      <span id="musicIcon">🎸</span> <span id="musicText">Play Acoustic Tune</span>
+      <span id="musicIcon">🎵</span> <span id="musicText">Tap for Music</span>
     </button>
 
-    <!-- High Quality Soft Guitar Audio Stream -->
-    <audio id="bgAudio" loop preload="auto">
-      <source src="https://assets.mixkit.co/music/preview/mixkit-acoustic-guitar-under-the-tree-1227.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- SLIDE 1: Gentle Welcome & Tap to Reveal -->
+    <!-- SLIDE 1: Interactive Envelopes -->
     <div class="section active" id="slide1">
       <div style="font-size: 2.2rem; margin-bottom: 5px;">🌷</div>
       <h1>Hey Priya!</h1>
-      <p>Tumhare birthday ke liye ek chota sa surprise banaya hai. Niche diye envelopes par tap karo!</p>
+      <p>Tumhare birthday ke liye ek chota sa interactive surprise! Neeche diye envelopes par tap karo:</p>
 
       <div class="cards-grid">
-        <div class="card-box" onclick="popCard(1, 'Always bringing warmth & positive vibes wherever you go! ✨')">
+        <div class="card-box" onclick="popCard(1, 'Bring absolute positive energy & smiles wherever you go! ✨')">
           ✉️
         </div>
-        <div class="card-box" onclick="popCard(2, 'Super dependable, kind-hearted & grounded person! 🤍')">
+        <div class="card-box" onclick="popCard(2, 'Super understanding, effortless conversation & pure comfort person! 🌸')">
           💌
         </div>
-        <div class="card-box" onclick="popCard(3, 'The one who quietly manages everything like a rockstar! 🌸')">
+        <div class="card-box" onclick="popCard(3, 'Quietly managing everything with grace like a real hero! 🤍')">
           🎁
         </div>
       </div>
 
       <div class="surprise-text" id="surpriseMsg">
-        Tap on any card to open a note...
+        Tap on any envelope to open a message...
       </div>
 
       <button class="btn" id="btnSlide1" style="display:none; margin-top:15px;" onclick="nextSlide(2)">Aage Chalo ➔</button>
     </div>
 
-    <!-- SLIDE 2: Fun Quiz with Unique Friendly Responses -->
+    <!-- SLIDE 2: Fun Quiz -->
     <div class="section" id="slide2">
       <h2>Ek Chota Sa Truth Check 😄</h2>
-      <p>Aage badhne ke liye sahi answer choose karna mandatory hai!</p>
+      <p>Aage badhne ke liye sahi answer select karna zaroori hai!</p>
       
-      <p style="text-align:left; color:var(--primary); width:100%; margin-bottom:12px; font-weight:600; font-size:0.95rem;">Q: Priya ki sabse unique baat kya hai?</p>
+      <p style="text-align:left; color:var(--primary); width:100%; margin-bottom:12px; font-weight:600; font-size:0.95rem;">Q: Priya ki sabse best quality kya hai?</p>
       
-      <button class="option-btn" onclick="wrongOption(1)">A) Subah se shaam tak sirf kaam ki baatein karna 📄</button>
-      <button class="option-btn" onclick="wrongOption(2)">B) Har choti baat pe tension lena aur panic karna 🙈</button>
-      <button class="option-btn" onclick="correctOption()">C) Bilkul calm rehkar sab sambhalna & bina show-off kiye sabki care karna ✨</button>
-      <button class="option-btn" onclick="wrongOption(3)">D) Har waqt bas sote rehna 😴</button>
+      <button class="option-btn" onclick="wrongOption(1)">A) Subah se shaam tak sirf serious rahena 📄</button>
+      <button class="option-btn" onclick="wrongOption(2)">B) Choti baaton par panic ho jana 🙈</button>
+      <button class="option-btn" onclick="correctOption()">C) Bilkul calm, grounded, caring & effortless bestie vibe ✨</button>
+      <button class="option-btn" onclick="wrongOption(3)">D) Baatein sunke bhool jana 😴</button>
       
-      <p id="quizError" style="color:#d9534f; font-size:0.85rem; display:none; margin-top:10px; font-weight:500; line-height:1.4;"></p>
+      <p id="quizError" style="color:#e11d48; font-size:0.85rem; display:none; margin-top:10px; font-weight:500; line-height:1.4;"></p>
     </div>
 
-    <!-- SLIDE 3: Memory & Bestie Vibe Timeline (NEW IDEA) -->
+    <!-- SLIDE 3: Magic Reveal Secret Box -->
     <div class="section" id="slide3">
-      <div style="font-size: 2rem; margin-bottom: 5px;">📜</div>
-      <h2>Bestie Vibe Highlights ✨</h2>
-      <p>A few things that define your awesome personality:</p>
+      <div style="font-size: 2rem; margin-bottom: 5px;">🎁</div>
+      <h2>Secret Note Reveal</h2>
+      <p>Neeche wale card par tap karke secret message unlock karein:</p>
 
-      <div class="timeline-box">
-        <div class="timeline-item">☕ <b>100% Fueled:</b> Coffee & High Energy Mode</div>
-        <div class="timeline-item">🎨 <b>Aesthetic Soul:</b> Art, Fashion & Style on point</div>
-        <div class="timeline-item">🤍 <b>Pure Heart:</b> Always there for her people</div>
+      <div class="scratch-box" id="scratchCard" onclick="revealSecret()">
+        <span id="scratchHint" style="color:#64748b; font-weight:600;">✨ Tap to Open Secret Message ✨</span>
+        <div id="scratchContent" style="display:none; color:#1e293b; font-size:0.92rem; line-height:1.6;">
+          "Log milte hain aur chale jaate hain, par kuch dost aise hote hain jo hamesha special jagah bana lete hain. Thanks for being so genuine!"
+        </div>
       </div>
 
       <div class="note-card">
@@ -239,32 +238,32 @@
         Har din tumhara khoobsurat ho aur haseen ho har shaam."
       </div>
 
-      <button class="btn" onclick="nextSlide(4)">Cake Cut Karte Hain 🎂</button>
+      <button class="btn" onclick="nextSlide(4)">Let's Cut The Cake 🎂</button>
     </div>
 
-    <!-- SLIDE 4: Virtual Cake Cutting -->
+    <!-- SLIDE 4: Virtual Cake -->
     <div class="section" id="slide4">
       <h2>🎂 Make a Wish!</h2>
-      <p>Candle bujhane aur final wish ke liye **Cake par tap karo**!</p>
+      <p>Candle bujhane aur celebration ke liye **Cake par tap karo**!</p>
 
       <div class="cake" onclick="cutCake()">
         <span class="candle" id="flame">🕯️</span>
         🎂
       </div>
 
-      <p style="font-size:0.85rem; color:var(--accent); font-weight:500;">*Tap the cake to blow the candle!*</p>
+      <p style="font-size:0.85rem; color:var(--accent); font-weight:600;">*Tap the cake to blow the candle!*</p>
     </div>
 
-    <!-- SLIDE 5: Warm & Personal English Message -->
+    <!-- SLIDE 5: Final Wish -->
     <div class="section" id="slide5">
       <div style="font-size: 2.5rem; margin-bottom: 5px;">🌸 🎉</div>
       <h1 style="font-size: 2.2rem;">Happy Birthday, Priya!</h1>
 
-      <div style="text-align:left; background:#faf8f5; padding:18px; border-radius:16px; border:1px solid #f0e6df; font-size:0.9rem; line-height:1.7; color:#4a4e69; margin:15px 0;">
-        Wish you a wonderful Birthday! 🎂✨<br><br>
-        Just wanted to take a moment to tell you how awesome you are. The way you handle everything in life with a smile, keep your loved ones happy, and stay so grounded is truly admirable.<br><br>
-        I hope this coming year brings you peace, lots of happy moments, good health, and all the success you wish for. Stay blessed and keep spreading your positive vibe!<br><br>
-        Have a wonderful day ahead! 🥂
+      <div style="text-align:left; background:#fff1f2; padding:18px; border-radius:16px; border:1px solid #fecdd3; font-size:0.9rem; line-height:1.7; color:#334155; margin:15px 0;">
+        Wish you a very Happy Birthday! 🎂✨<br><br>
+        Just wanted to send you a warm reminder of how awesome and inspiring you are. Keep spreading your positive, calm, and beautiful energy everywhere you go.<br><br>
+        May this year bring you endless peace, joy, wonderful memories, and all the success you deserve!<br><br>
+        Have a splendid day ahead! 🥂
       </div>
 
       <button class="btn" onclick="triggerConfetti()">Celebrate Again 🎊</button>
@@ -279,26 +278,26 @@
     function toggleMusic() {
       if(!isPlaying) {
         bgAudio.play().then(() => {
-          document.getElementById('musicText').innerText = "Music Playing 🎶";
+          document.getElementById('musicText').innerText = "Playing 🎶";
           isPlaying = true;
-        }).catch(e => console.log(e));
+        }).catch(err => console.log("Music Play Error:", err));
       } else {
         bgAudio.pause();
-        document.getElementById('musicText').innerText = "Play Acoustic Tune";
+        document.getElementById('musicText').innerText = "Play Music";
         isPlaying = false;
       }
     }
 
-    function ensureMusic() {
+    function autoPlayMusic() {
       if (!isPlaying) {
         toggleMusic();
       }
     }
 
     function popCard(num, msg) {
-      ensureMusic();
+      autoPlayMusic();
       document.getElementById('surpriseMsg').innerText = msg;
-      confetti({ particleCount: 20, spread: 40, origin: { y: 0.7 } });
+      confetti({ particleCount: 25, spread: 50, origin: { y: 0.7 } });
       poppedCount++;
       if(poppedCount >= 2) {
         document.getElementById('btnSlide1').style.display = 'block';
@@ -306,41 +305,48 @@
     }
 
     function wrongOption(type) {
-      ensureMusic();
+      autoPlayMusic();
       const errorBox = document.getElementById('quizError');
       errorBox.style.display = 'block';
 
       if(type === 1) {
-        errorBox.innerText = "Haha galat! Sirf kaam ki baat? Priya se chill aur friendly baatein bhi khoob hoti hain 😜";
+        errorBox.innerText = "Haha galat! Serious? Priya ke saath chill aur mazedar baatein hi hoti hain 😜";
       } else if(type === 2) {
-        errorBox.innerText = "Arey nahi! Panic hona toh unki list mein hi nahi hai, bohot calm rehne wali vibe hai 🌸";
+        errorBox.innerText = "Nope! Panic bilkul nahi, kaafi calm aur sorted attitude hai unka 🌸";
       } else {
-        errorBox.innerText = "Aisa bilkul nahi hai! Active rehna unka daily routine hai 🏃‍♀️ Try again!";
+        errorBox.innerText = "Haha aisa bilkul nahi hai! Sahi option select karo 🏃‍♀️";
       }
     }
 
     function correctOption() {
-      ensureMusic();
+      autoPlayMusic();
       document.getElementById('quizError').style.display = 'none';
-      confetti({ particleCount: 40, spread: 60, origin: { y: 0.6 } });
+      confetti({ particleCount: 50, spread: 70, origin: { y: 0.6 } });
       setTimeout(() => nextSlide(3), 500);
     }
 
+    function revealSecret() {
+      autoPlayMusic();
+      document.getElementById('scratchHint').style.display = 'none';
+      document.getElementById('scratchContent').style.display = 'block';
+      confetti({ particleCount: 30, spread: 50, origin: { y: 0.6 } });
+    }
+
     function nextSlide(slideNum) {
-      ensureMusic();
+      autoPlayMusic();
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       document.getElementById('slide' + slideNum).classList.add('active');
     }
 
     function cutCake() {
-      ensureMusic();
+      autoPlayMusic();
       document.getElementById('flame').style.display = 'none';
-      confetti({ particleCount: 140, spread: 90, origin: { y: 0.5 } });
+      confetti({ particleCount: 160, spread: 100, origin: { y: 0.5 } });
       setTimeout(() => nextSlide(5), 1000);
     }
 
     function triggerConfetti() {
-      confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+      confetti({ particleCount: 220, spread: 110, origin: { y: 0.6 } });
     }
   </script>
 </body>
