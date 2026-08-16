@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Special Journey for Priya ✨</title>
+  <title>Fairy Story for Priya ✨</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-start: #fdf4f5;
+      --bg-start: #fff1f2;
       --bg-end: #f3e8ff;
       --card: #ffffff;
-      --accent: #db2777;
-      --primary: #334155;
+      --accent: #f43f5e;
+      --primary: #1e293b;
       --subtext: #64748b;
-      --gold: #d97706;
+      --purple: #8b5cf6;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
@@ -30,111 +30,135 @@
 
     .app-container { 
       width: 100%; 
-      max-width: 440px; 
+      max-width: 430px; 
       background: var(--card); 
-      border-radius: 30px; 
-      padding: 30px 24px; 
-      box-shadow: 0 20px 45px rgba(219, 39, 119, 0.08); 
+      border-radius: 28px; 
+      padding: 26px 20px; 
+      box-shadow: 0 15px 35px rgba(244, 63, 94, 0.1); 
       position: relative; 
       overflow: hidden; 
-      min-height: 620px; 
+      min-height: 600px; 
       display: flex; 
       flex-direction: column; 
       justify-content: center; 
-      border: 1px solid rgba(255, 255, 255, 0.8);
+      border: 2px solid #ffe4e6;
     }
 
-    .section { display: none; flex-direction: column; align-items: center; text-align: center; animation: fadeIn 0.5s ease-out; width: 100%; }
+    .section { display: none; flex-direction: column; align-items: center; text-align: center; animation: fadeIn 0.4s ease-out; width: 100%; }
     .section.active { display: flex; }
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
 
-    h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--accent); margin-bottom: 8px; font-weight: 600; }
-    h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 12px; color: var(--primary); }
-    p { font-size: 0.93rem; line-height: 1.7; color: var(--subtext); margin-bottom: 16px; }
+    h1 { font-family: 'Fredoka', cursive; font-size: 2.2rem; color: var(--accent); margin-bottom: 6px; }
+    h2 { font-family: 'Fredoka', cursive; font-size: 1.5rem; margin-bottom: 8px; color: var(--purple); }
+    p { font-size: 0.92rem; line-height: 1.6; color: var(--subtext); margin-bottom: 14px; }
 
     .btn { 
-      background: linear-gradient(135deg, #db2777, #f43f5e); 
+      background: linear-gradient(135deg, #f43f5e, #e11d48); 
       color: white; 
       border: none; 
-      padding: 13px 24px; 
+      padding: 13px 22px; 
       border-radius: 50px; 
-      font-weight: 500; 
-      font-size: 0.93rem; 
+      font-weight: 600; 
+      font-size: 0.95rem; 
       width: 100%; 
-      margin-top: 12px; 
+      margin-top: 10px; 
       cursor: pointer; 
       transition: all 0.2s ease;
-      box-shadow: 0 4px 15px rgba(219, 39, 119, 0.25);
+      box-shadow: 0 4px 14px rgba(244, 63, 94, 0.3);
     }
     .btn:active { transform: scale(0.97); }
 
-    /* Storybook Memory Cards */
-    .memory-grid { display: flex; flex-direction: column; gap: 10px; width: 100%; margin: 10px 0; }
-    .memory-card { 
-      background: #fdf2f8; 
-      border: 1px dashed #fbcfe8; 
-      padding: 14px 16px; 
-      border-radius: 16px; 
-      cursor: pointer; 
+    /* Meme Visual Cards */
+    .meme-card {
+      background: #faf5ff;
+      border: 2px solid #f3e8ff;
+      border-radius: 20px;
+      padding: 14px;
+      margin: 8px 0;
+      width: 100%;
       text-align: left;
-      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(139, 92, 246, 0.05);
     }
-    .memory-card:hover { background: #fce7f3; transform: translateX(4px); }
-    .memory-title { font-weight: 600; color: var(--accent); font-size: 0.95rem; margin-bottom: 3px; }
-    .memory-desc { font-size: 0.85rem; color: var(--subtext); line-height: 1.5; margin: 0; }
+    .meme-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: var(--purple);
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+    .meme-box {
+      background: #ffffff;
+      border: 1px dashed #d8b4fe;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 0.85rem;
+      color: #475569;
+      line-height: 1.5;
+    }
+    .meme-tag {
+      display: inline-block;
+      background: #fecdd3;
+      color: #9f1239;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-bottom: 4px;
+    }
 
     /* Game Area */
     .game-area {
       width: 100%;
       height: 170px;
-      background: #faf5ff;
-      border: 2px dashed #e9d5ff;
-      border-radius: 18px;
+      background: #fff1f2;
+      border: 2px dashed #fecdd3;
+      border-radius: 20px;
       position: relative;
       overflow: hidden;
       margin: 10px 0;
       cursor: pointer;
     }
-    .floating-star {
+    .floating-item {
       position: absolute;
-      font-size: 2rem;
+      font-size: 2.2rem;
       user-select: none;
       cursor: pointer;
-      animation: floatStar 2.5s linear infinite;
+      animation: fall 2.2s linear infinite;
     }
-    @keyframes floatStar {
-      0% { top: -30px; }
+    @keyframes fall {
+      0% { top: -40px; }
       100% { top: 190px; }
     }
 
-    /* Elegant Secret Note */
-    .fairy-note {
+    /* Secret Card Box */
+    .note-box {
       background: #fffbeb;
-      border: 1px solid #fde68a;
-      padding: 20px;
+      border: 2px solid #fef08a;
+      padding: 18px;
       border-radius: 20px;
       width: 100%;
       margin: 10px 0;
       text-align: left;
-      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.05);
     }
 
     /* Cake */
-    .cake { font-size: 4.8rem; cursor: pointer; margin: 15px 0; position: relative; display: inline-block; }
-    .candle { position: absolute; top: -10px; left: 42%; font-size: 1.5rem; animation: flicker 0.8s infinite alternate; }
-    @keyframes flicker { 0% { opacity: 0.8; transform: translateY(0); } 100% { opacity: 1; transform: translateY(-4px); } }
+    .cake { font-size: 5rem; cursor: pointer; margin: 12px 0; position: relative; display: inline-block; }
+    .candle { position: absolute; top: -12px; left: 42%; font-size: 1.6rem; animation: float 0.8s infinite alternate; }
+    @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-5px); } }
 
     /* Music Button */
     .music-btn { 
       position: absolute; 
-      top: 18px; 
-      right: 18px; 
-      background: #fdf2f8; 
+      top: 16px; 
+      right: 16px; 
+      background: #fff1f2; 
       padding: 6px 14px; 
       border-radius: 20px; 
-      font-size: 0.75rem; 
-      border: 1px solid #fbcfe8; 
+      font-size: 0.78rem; 
+      border: 1px solid #fecdd3; 
       color: var(--accent); 
       cursor: pointer; 
       font-weight: 600;
@@ -147,101 +171,106 @@
 </head>
 <body>
 
-  <!-- Embedded Soft Birthday Audio Stream -->
-  <audio id="bgMusic" loop preload="auto">
-    <source src="data:audio/wav;base64,UklGRqA3AABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YYA3AAAAAAEA/v8BAP7/AQD+/wEA/v8BAP7/AQD+/wEA/v8BAP7/AQD+/wEA/v8BAP7/AQD+/wEA/v8BAP7/AQD+/wEA/v8BAP7/AQD+/wEA/v8BAP7/AQD+/wEA/v8BAP7/AQD+/wEA/v8BAP7/AQD+/wEA/v8BAP7/AQD+/wEA/v8=" type="audio/wav">
-  </audio>
-
   <div class="app-container">
-    <button class="music-btn" onclick="toggleAudio()">
-      <span id="musicIcon">🎵</span> <span id="musicText">Tap for Music</span>
+    <button class="music-btn" onclick="toggleTune()">
+      <span id="musicIcon">🎵</span> <span id="musicText">Play Fairy Music</span>
     </button>
 
-    <!-- SLIDE 1: Fairy Tale Welcome -->
+    <!-- SLIDE 1: Fairy Welcome -->
     <div class="section active" id="slide1">
-      <div style="font-size: 2.5rem; margin-bottom: 5px;">📖✨</div>
-      <h1>A Story for Priya</h1>
-      <p>Aapke is special birthday par, chaliye ek choti si yatra par chalte hain jo aapki yaadon aur khubsurat lamhon se judi hai...</p>
-      <button class="btn" onclick="startExperience(2)">Panne Paltein ➔</button>
+      <div style="font-size: 2.8rem; margin-bottom: 5px;">👑✨</div>
+      <h1>Happy Birthday Priya!</h1>
+      <p>Aapke liye ek choti si fairy-tale style journey hai. Ready ho?</p>
+      <button class="btn" onclick="startJourney(2)">Panna Palto ➔</button>
     </div>
 
-    <!-- SLIDE 2: Memories & Delayed Plans -->
+    <!-- SLIDE 2: Memes & Fairy Tale Stories (Bachpan & Delayed Plans) -->
     <div class="section" id="slide2">
-      <h2>Pyaari Yaadein & Voh Delayed Plans 🌸</h2>
-      <p style="font-size: 0.88rem; margin-bottom: 10px;">Tap karke dekhiye yeh khubsurat panne:</p>
+      <h2>Fairy Tale vs Reality 🏰</h2>
+      <p>Aapki life ke kuch super relatable chapters:</p>
 
-      <div class="memory-grid">
-        <div class="memory-card" onclick="showMemoryDetail(this, 'Bachpan ki masoomiyat aur woh purani baatein, jo aaj bhi chehre par ek meethi si muskaan le aati hain.')">
-          <div class="memory-title">🌟 Bachpan Ke Din</div>
-          <p class="memory-desc">Woh din jab choti-choti baaton mein khushi milti thi...</p>
-        </div>
-        <div class="memory-card" onclick="showMemoryDetail(this, 'Humare woh unnumbered ghoomne ke plans jo hamesha \'next weekend\' par shift ho jaate hain! ✈️')">
-          <div class="memory-title">🗺️ Voh Delayed Trips</div>
-          <p class="memory-desc">Trip planning best hoti hai, par execution ka intezaar...</p>
-        </div>
-        <div class="memory-card" onclick="showMemoryDetail(this, 'Lambi movies, random food cravings aur woh endless baatein jinpar waqt ka pata hi nahi chalta. 🍿')">
-          <div class="memory-title">🍲 Khana, Peena & Movies</div>
-          <p class="memory-desc">Aapke sath har catch-up ek alag hi comfort deta hai...</p>
+      <!-- Meme Card 1 -->
+      <div class="meme-card">
+        <span class="meme-tag">MEME #1</span>
+        <div class="meme-header">🗺️ The Eternal Plan Delay</div>
+        <div class="meme-box">
+          <b>Expectation:</b> "Is weekend ghoomne chalte hain!" 🚗💨<br>
+          <b>Reality:</b> "Agle month pakka scene banate hain..." <i>(and loop repeats forever ♾️)</i>
         </div>
       </div>
 
-      <div id="memoryPopup" style="font-size: 0.85rem; color: var(--gold); min-height: 35px; margin-top: 5px; font-weight: 500;">
-        ( Kisi bhi card par tap karke memory padhein )
+      <!-- Meme Card 2 -->
+      <div class="meme-card">
+        <span class="meme-tag">MEME #2</span>
+        <div class="meme-header">🐣 Bachpan Ki Memories</div>
+        <div class="meme-box">
+          <b>Childhood:</b> "Bade hoke roz party karenge aur har din ghoominge!" 🥳<br>
+          <b>Adulthood:</b> "Ghar pe shaanti se chai/coffee mil jaye, bass wahi party hai." ☕🛋️
+        </div>
       </div>
 
-      <button class="btn" id="btnSlide2" style="margin-top: 10px;" onclick="nextSlide(3)">Aage Badhein ➔</button>
+      <!-- Meme Card 3 -->
+      <div class="meme-card">
+        <span class="meme-tag">MEME #3</span>
+        <div class="meme-header">🍰 Birthday Party Scene</div>
+        <div class="meme-box">
+          "Party kahan hai?" bolne wale 100 log ready hain, par location decide karne mein 3 din lagenge! 🍕🍔
+        </div>
+      </div>
+
+      <button class="btn" onclick="nextSlide(3)">Game Khele? ➔</button>
     </div>
 
-    <!-- SLIDE 3: Magical Stars Catching Game -->
+    <!-- SLIDE 3: Catching Game (Gifts & Stars) -->
     <div class="section" id="slide3">
-      <div style="font-size: 2rem; margin-bottom: 5px;">⭐</div>
+      <div style="font-size: 2.2rem; margin-bottom: 5px;">🎮</div>
       <h2>Catch the Wishing Stars</h2>
-      <p>Aage badhne ke liye 3 magical stars ko catch karein!</p>
+      <p>Aage badhne ke liye 3 stars catch kar lo jaldi se!</p>
 
       <div class="game-area" id="gameArea">
-        <div class="floating-star" id="star" style="left: 42%;" onclick="catchStar()">⭐</div>
+        <div class="floating-item" id="star" style="left: 42%;" onclick="catchStar()">⭐</div>
       </div>
 
-      <p style="font-weight: 500; color: var(--accent); font-size: 0.9rem;">Stars Collected: <span id="starScore">0</span> / 3</p>
+      <p style="font-weight:600; color:var(--accent); margin-top: 5px;">Score: <span id="starScore">0</span> / 3</p>
 
-      <button class="btn" id="btnGameNext" style="display:none; margin-top:10px;" onclick="nextSlide(4)">Unlock Special Note ➔</button>
+      <button class="btn" id="btnGameNext" style="display:none; margin-top:10px;" onclick="nextSlide(4)">Secret Note Unlock Karo ➔</button>
     </div>
 
-    <!-- SLIDE 4: Secret Note -->
+    <!-- SLIDE 4: Secret Note (Friend-Zone + Respectful Balance) -->
     <div class="section" id="slide4">
-      <div style="font-size: 2.2rem; margin-bottom: 5px;">💌</div>
-      <h2>A Genuine Note For You</h2>
+      <div style="font-size: 2.5rem; margin-bottom: 5px;">💌</div>
+      <h2>A Quick Note For You</h2>
       
-      <div class="fairy-note">
-        <p style="color: var(--primary); font-size: 0.93rem; line-height: 1.8; margin: 0; font-family: 'Playfair Display', serif;">
-          "Priya, aapka yeh saal dher saari khushiyan lekar aaye. Aap jis tarah se har cheez ko calm aur balanced tarike se sambhalti hain, woh sach mein kaabil-e-tareef hai. Ek bahut hi acche aur genuine dost hone ke liye shukriya. Ummeed hai aapka yeh birthday utna hi khubsurat ho jitni aapki positive energy hai. ✨"
+      <div class="note-box">
+        <p style="color: #334155; font-size: 0.93rem; line-height: 1.7; margin: 0; font-weight: 500;">
+          Priya, aapke sath baat karke hamesha ek super chill aur sorted vibe aati hai. Aap jis tarah se relaxed aur calm rehti ho, wo sach mein kaafi cool hai! High-five for being such an awesome friend. Is saal saare delayed plans finally successful ho jayein! ✨
         </p>
       </div>
 
-      <button class="btn" style="margin-top: 15px;" onclick="nextSlide(5)">Cake Cutting Time 🎂</button>
+      <button class="btn" style="margin-top: 10px;" onclick="nextSlide(5)">Cake Cutting Time 🎂</button>
     </div>
 
-    <!-- SLIDE 5: Virtual Cake Cutting -->
+    <!-- SLIDE 5: Virtual Cake -->
     <div class="section" id="slide5">
-      <h2>🎂 Make a Graceful Wish</h2>
-      <p>Birthday wish maangne ke liye **Cake par tap karein**!</p>
+      <h2>🎂 Wish Maango & Blow Candle!</h2>
+      <p>Cake par tap karke candle bujhao:</p>
 
       <div class="cake" onclick="cutCake()">
         <span class="candle" id="flame">🕯️</span>
         🎂
       </div>
 
-      <p style="font-size: 0.83rem; color: var(--accent); font-weight: 500;">*Tap the cake to blow out the candle*</p>
+      <p style="font-size: 0.82rem; color: var(--accent); font-weight: 600;">*Tap the cake to cut*</p>
     </div>
 
-    <!-- SLIDE 6: Final Fairy Tale Blessing -->
+    <!-- SLIDE 6: Final Grand Wish -->
     <div class="section" id="slide6">
-      <div style="font-size: 2.5rem; margin-bottom: 5px;">🌸🥂</div>
-      <h1 style="font-size: 2rem;">Happy Birthday, Priya!</h1>
+      <div style="font-size: 2.8rem; margin-bottom: 5px;">🎉 🥂</div>
+      <h1>Happy Birthday, Priya!</h1>
 
-      <div class="fairy-note" style="text-align: center; margin: 15px 0;">
-        <p style="color: var(--primary); font-size: 0.9rem; line-height: 1.7; margin: 0;">
-          Wishing you a wonderful year ahead filled with peace, success, and all your dream destinations unlocked! Have a truly splendid day. ✨🥂
+      <div class="note-box" style="text-align: center; margin: 15px 0; background: #fff1f2; border-color: #fecdd3;">
+        <p style="color: #334155; font-size: 0.92rem; line-height: 1.7; margin: 0; font-weight: 500;">
+          Wish you a wonderful year ahead filled with happiness, peace, badhiya khana, aur bhot saari success! Enjoy your day to the fullest! 🌸✨
         </p>
       </div>
 
@@ -251,62 +280,61 @@
 
   <script>
     let starScore = 0;
-    const audio = document.getElementById('bgMusic');
-    let isPlaying = false;
     let audioCtx = null;
+    let isPlaying = false;
+    let timerId = null;
 
-    // Fallback Melody Generator using Web Audio API for smooth background music
-    function playMelodyNote(freq, duration) {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      
+    // Super Soft & Cute Music Box Melody
+    const tuneNotes = [
+      523.25, 523.25, 587.33, 523.25, 698.46, 659.25,
+      523.25, 523.25, 587.33, 523.25, 783.99, 698.46,
+      523.25, 523.25, 1046.50, 880.00, 698.46, 659.25, 587.33
+    ];
+    let noteIdx = 0;
+
+    function playNote(freq) {
+      if(!audioCtx) return;
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
-      osc.type = 'triangle';
+      osc.type = 'sine'; // Soft sine wave for music box sound
       osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+      gain.gain.setValueAtTime(0.04, audioCtx.currentTime); // Very gentle volume
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.8);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
       osc.start();
-      osc.stop(audioCtx.currentTime + duration);
+      osc.stop(audioCtx.currentTime + 0.8);
     }
 
-    const bdayNotes = [261, 261, 293, 261, 349, 329, 261, 261, 293, 261, 392, 349];
-    let noteIdx = 0;
-    let musicInterval = null;
+    function toggleTune() {
+      if(!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if(audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
 
-    function toggleAudio() {
-      if (!isPlaying) {
+      if(!isPlaying) {
         isPlaying = true;
-        document.getElementById('musicText').innerText = "Playing Music 🎶";
-        
-        // Play smooth melody loop
-        musicInterval = setInterval(() => {
-          playMelodyNote(bdayNotes[noteIdx], 0.6);
-          noteIdx = (noteIdx + 1) % bdayNotes.length;
-        }, 500);
-
-        audio.play().catch(() => {});
+        document.getElementById('musicText').innerText = "Playing Tune 🎶";
+        timerId = setInterval(() => {
+          playNote(tuneNotes[noteIdx]);
+          noteIdx = (noteIdx + 1) % tuneNotes.length;
+        }, 420);
       } else {
         isPlaying = false;
-        document.getElementById('musicText').innerText = "Play Music";
-        clearInterval(musicInterval);
-        audio.pause();
+        document.getElementById('musicText').innerText = "Play Fairy Music";
+        clearInterval(timerId);
       }
     }
 
-    function startExperience(nextStep) {
-      toggleAudio();
+    function startJourney(nextStep) {
+      if(!isPlaying) toggleTune();
       nextSlide(nextStep);
     }
 
-    function showMemoryDetail(element, text) {
-      document.getElementById('memoryPopup').innerText = text;
-      confetti({ particleCount: 15, spread: 40, origin: { y: 0.6 } });
-    }
-
     function catchStar() {
+      if(!isPlaying) toggleTune();
       starScore++;
       document.getElementById('starScore').innerText = starScore;
       confetti({ particleCount: 20, spread: 40, origin: { y: 0.6 } });
@@ -322,18 +350,20 @@
     }
 
     function nextSlide(slideNum) {
+      if(!isPlaying) toggleTune();
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       document.getElementById('slide' + slideNum).classList.add('active');
     }
 
     function cutCake() {
+      if(!isPlaying) toggleTune();
       document.getElementById('flame').style.display = 'none';
-      confetti({ particleCount: 150, spread: 90, origin: { y: 0.5 } });
+      confetti({ particleCount: 160, spread: 90, origin: { y: 0.5 } });
       setTimeout(() => nextSlide(6), 1000);
     }
 
     function triggerConfetti() {
-      confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+      confetti({ particleCount: 220, spread: 100, origin: { y: 0.6 } });
     }
   </script>
 </body>
