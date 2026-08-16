@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Little Surprise for Priya ✨</title>
+  <title>Surprise for Priya ✨</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -37,7 +37,7 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.08); 
       position: relative; 
       overflow: hidden; 
-      min-height: 590px; 
+      min-height: 600px; 
       display: flex; 
       flex-direction: column; 
       justify-content: center; 
@@ -68,7 +68,7 @@
     }
     .btn:active { transform: scale(0.97); }
 
-    /* Interactive Cards */
+    /* Interactive Envelope Cards */
     .cards-grid { display: flex; gap: 10px; margin: 15px 0; width: 100%; }
     .card-box { 
       background: #fff1f2; 
@@ -114,37 +114,50 @@
     }
     .option-btn:hover { background: #fff1f2; border-color: var(--accent); }
 
-    /* Magic Reveal Box */
-    .scratch-box {
+    /* Game Box */
+    .game-area {
+      width: 100%;
+      height: 180px;
+      background: #fff1f2;
+      border: 2px dashed #fecdd3;
+      border-radius: 18px;
+      position: relative;
+      overflow: hidden;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+    .gift-item {
+      position: absolute;
+      font-size: 2rem;
+      user-select: none;
+      cursor: pointer;
+      animation: fall 2.5s linear infinite;
+    }
+    @keyframes fall {
+      0% { top: -40px; }
+      100% { top: 200px; }
+    }
+
+    /* Secret Card Box */
+    .secret-card {
       background: #f1f5f9;
       border: 2px dashed #cbd5e1;
-      padding: 16px;
-      border-radius: 16px;
+      padding: 20px;
+      border-radius: 18px;
       cursor: pointer;
       width: 100%;
-      margin: 12px 0;
+      margin: 15px 0;
       transition: 0.3s;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .scratch-box:hover { background: #e2e8f0; }
 
     /* Cake & Candle */
     .cake { font-size: 5.2rem; cursor: pointer; margin: 15px 0; position: relative; display: inline-block; }
     .candle { position: absolute; top: -12px; left: 40%; font-size: 1.6rem; animation: float 0.8s infinite alternate; }
     @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-5px); } }
-
-    /* Shayari Card */
-    .note-card { 
-      background: #fff1f2; 
-      border-left: 4px solid var(--accent); 
-      padding: 18px; 
-      border-radius: 12px; 
-      font-style: italic; 
-      color: #334155; 
-      font-size: 0.95rem; 
-      line-height: 1.8; 
-      margin: 15px 0; 
-      text-align: left;
-    }
 
     /* Music Control Header */
     .music-btn { 
@@ -162,27 +175,26 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
   </style>
 </head>
 <body>
 
-  <!-- Audio Element with High Quality Soft Track -->
+  <!-- Authentic Soft Birthday Music Track -->
   <audio id="bgAudio" loop preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=soft-piano-10074.mp3" type="audio/mpeg">
+    <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-431.mp3" type="audio/mpeg">
   </audio>
 
   <div class="app-container">
     <button class="music-btn" onclick="toggleMusic()">
-      <span id="musicIcon">🎵</span> <span id="musicText">Tap for Music</span>
+      <span id="musicIcon">🎵</span> <span id="musicText">Tap for Birthday Song</span>
     </button>
 
-    <!-- SLIDE 1: Interactive Envelopes -->
+    <!-- SLIDE 1: Welcome & Envelopes -->
     <div class="section active" id="slide1">
       <div style="font-size: 2.2rem; margin-bottom: 5px;">🌷</div>
       <h1>Hey Priya!</h1>
-      <p>Tumhare birthday ke liye ek chota sa interactive surprise! Neeche diye envelopes par tap karo:</p>
+      <p>Tumhare birthday ke liye ek chota sa interactive surprise! Envelopes par tap karo:</p>
 
       <div class="cards-grid">
         <div class="card-box" onclick="popCard(1, 'Bring absolute positive energy & smiles wherever you go! ✨')">
@@ -218,31 +230,39 @@
       <p id="quizError" style="color:#e11d48; font-size:0.85rem; display:none; margin-top:10px; font-weight:500; line-height:1.4;"></p>
     </div>
 
-    <!-- SLIDE 3: Magic Reveal Secret Box -->
+    <!-- SLIDE 3: Mini Game (Catch 3 Gifts) -->
     <div class="section" id="slide3">
-      <div style="font-size: 2rem; margin-bottom: 5px;">🎁</div>
-      <h2>Secret Note Reveal</h2>
-      <p>Neeche wale card par tap karke secret message unlock karein:</p>
+      <div style="font-size: 2rem; margin-bottom: 5px;">🎮</div>
+      <h2>Catch Your Birthday Gifts!</h2>
+      <p>Aage badhne ke liye 3 falling gifts par tap karke catch karo!</p>
 
-      <div class="scratch-box" id="scratchCard" onclick="revealSecret()">
-        <span id="scratchHint" style="color:#64748b; font-weight:600;">✨ Tap to Open Secret Message ✨</span>
-        <div id="scratchContent" style="display:none; color:#1e293b; font-size:0.92rem; line-height:1.6;">
-          "Log milte hain aur chale jaate hain, par kuch dost aise hote hain jo hamesha special jagah bana lete hain. Thanks for being so genuine!"
+      <div class="game-area" id="gameArea">
+        <div class="gift-item" id="gift" style="left: 40%;" onclick="catchGift()">🎁</div>
+      </div>
+
+      <p style="font-weight:600; color:var(--accent);">Gifts Caught: <span id="giftScore">0</span> / 3</p>
+
+      <button class="btn" id="btnGameNext" style="display:none; margin-top:15px;" onclick="nextSlide(4)">Unlock Secret Message ➔</button>
+    </div>
+
+    <!-- SLIDE 4: Dedicated Secret Message Slide -->
+    <div class="section" id="slide4">
+      <div style="font-size: 2.2rem; margin-bottom: 5px;">🔐</div>
+      <h2>A Secret Message For You</h2>
+      <p>Iss card par tap karke secret message unlock karein:</p>
+
+      <div class="secret-card" id="secretCard" onclick="revealSecret()">
+        <span id="secretHint" style="color:#64748b; font-weight:600;">✨ Tap to reveal secret note ✨</span>
+        <div id="secretText" style="display:none; color:#1e293b; font-size:0.95rem; line-height:1.7; text-align:left;">
+          "Bohot kam log aise hote hain jinse baat karke lagta hai ki sab kitna simple aur calm hai. Tum bina kisi show-off ke sab kuch itne acche se sambhalti ho... Thank you for being such an amazingly genuine friend!"
         </div>
       </div>
 
-      <div class="note-card">
-        "Dil se saaf aur baaton mein mithas ho tum,<br>
-        Kuch logon mein sabse khas ho tum.<br>
-        Khushiyaan mile tumhein duniya ki tamaam,<br>
-        Har din tumhara khoobsurat ho aur haseen ho har shaam."
-      </div>
-
-      <button class="btn" onclick="nextSlide(4)">Let's Cut The Cake 🎂</button>
+      <button class="btn" id="btnSecretNext" style="display:none; margin-top:15px;" onclick="nextSlide(5)">Cake Cutting Time 🎂</button>
     </div>
 
-    <!-- SLIDE 4: Virtual Cake -->
-    <div class="section" id="slide4">
+    <!-- SLIDE 5: Virtual Cake -->
+    <div class="section" id="slide5">
       <h2>🎂 Make a Wish!</h2>
       <p>Candle bujhane aur celebration ke liye **Cake par tap karo**!</p>
 
@@ -254,8 +274,8 @@
       <p style="font-size:0.85rem; color:var(--accent); font-weight:600;">*Tap the cake to blow the candle!*</p>
     </div>
 
-    <!-- SLIDE 5: Final Wish -->
-    <div class="section" id="slide5">
+    <!-- SLIDE 6: Final Wish -->
+    <div class="section" id="slide6">
       <div style="font-size: 2.5rem; margin-bottom: 5px;">🌸 🎉</div>
       <h1 style="font-size: 2.2rem;">Happy Birthday, Priya!</h1>
 
@@ -272,26 +292,25 @@
 
   <script>
     let poppedCount = 0;
+    let score = 0;
     const bgAudio = document.getElementById('bgAudio');
     let isPlaying = false;
 
     function toggleMusic() {
       if(!isPlaying) {
         bgAudio.play().then(() => {
-          document.getElementById('musicText').innerText = "Playing 🎶";
+          document.getElementById('musicText').innerText = "Playing Song 🎶";
           isPlaying = true;
-        }).catch(err => console.log("Music Play Error:", err));
+        }).catch(err => console.log(err));
       } else {
         bgAudio.pause();
-        document.getElementById('musicText').innerText = "Play Music";
+        document.getElementById('musicText').innerText = "Play Birthday Song";
         isPlaying = false;
       }
     }
 
     function autoPlayMusic() {
-      if (!isPlaying) {
-        toggleMusic();
-      }
+      if (!isPlaying) toggleMusic();
     }
 
     function popCard(num, msg) {
@@ -325,11 +344,30 @@
       setTimeout(() => nextSlide(3), 500);
     }
 
+    function catchGift() {
+      autoPlayMusic();
+      score++;
+      document.getElementById('giftScore').innerText = score;
+      confetti({ particleCount: 20, spread: 40, origin: { y: 0.6 } });
+
+      const gift = document.getElementById('gift');
+      const randomLeft = Math.floor(Math.random() * 70) + 10;
+      gift.style.left = randomLeft + '%';
+
+      if(score >= 3) {
+        gift.style.display = 'none';
+        document.getElementById('btnGameNext').style.display = 'block';
+      }
+    }
+
     function revealSecret() {
       autoPlayMusic();
-      document.getElementById('scratchHint').style.display = 'none';
-      document.getElementById('scratchContent').style.display = 'block';
-      confetti({ particleCount: 30, spread: 50, origin: { y: 0.6 } });
+      document.getElementById('secretHint').style.display = 'none';
+      document.getElementById('secretText').style.display = 'block';
+      document.getElementById('secretCard').style.background = '#fff1f2';
+      document.getElementById('secretCard').style.borderColor = '#fecdd3';
+      confetti({ particleCount: 40, spread: 60, origin: { y: 0.6 } });
+      document.getElementById('btnSecretNext').style.display = 'block';
     }
 
     function nextSlide(slideNum) {
@@ -342,7 +380,7 @@
       autoPlayMusic();
       document.getElementById('flame').style.display = 'none';
       confetti({ particleCount: 160, spread: 100, origin: { y: 0.5 } });
-      setTimeout(() => nextSlide(5), 1000);
+      setTimeout(() => nextSlide(6), 1000);
     }
 
     function triggerConfetti() {
