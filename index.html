@@ -3,61 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fairy Story for Priya ✨</title>
+  <title>Priya | Birthday Edition ✨</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-start: #fff1f2;
-      --bg-end: #f3e8ff;
-      --card: #ffffff;
-      --accent: #f43f5e;
-      --primary: #1e293b;
-      --subtext: #64748b;
-      --purple: #8b5cf6;
+      --bg: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --accent: #ec4899;
+      --accent-glow: rgba(236, 72, 153, 0.35);
+      --purple: #a855f7;
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --gold: #f59e0b;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
-      background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%); 
-      color: var(--primary); 
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #090d16;
+      color: var(--text-main); 
+      font-family: 'Outfit', sans-serif;
       min-height: 100vh; 
       display: flex; 
       justify-content: center; 
       align-items: center; 
-      padding: 15px;
+      padding: 12px;
     }
 
     .app-container { 
       width: 100%; 
-      max-width: 430px; 
-      background: var(--card); 
-      border-radius: 28px; 
-      padding: 26px 20px; 
-      box-shadow: 0 15px 35px rgba(244, 63, 94, 0.1); 
+      max-width: 420px; 
+      background: radial-gradient(circle at top left, #1e1b4b, #0f172a 70%); 
+      border-radius: 32px; 
+      padding: 24px 20px; 
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px var(--accent-glow); 
       position: relative; 
       overflow: hidden; 
-      min-height: 600px; 
+      min-height: 640px; 
       display: flex; 
       flex-direction: column; 
-      justify-content: center; 
-      border: 2px solid #ffe4e6;
+      justify-content: space-between; 
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .section { display: none; flex-direction: column; align-items: center; text-align: center; animation: fadeIn 0.4s ease-out; width: 100%; }
+    /* Instagram Progress Indicator */
+    .story-progress { display: flex; gap: 5px; margin-bottom: 18px; }
+    .progress-bar { height: 3px; flex: 1; background: rgba(255,255,255,0.2); border-radius: 3px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #ec4899, #a855f7); transition: width 0.3s ease; }
+    .progress-bar.completed .progress-fill { width: 100%; }
+
+    .section { display: none; flex-direction: column; align-items: center; text-align: center; animation: slideUp 0.4s ease-out; width: 100%; height: 100%; flex-grow: 1; justify-content: center; }
     .section.active { display: flex; }
 
-    @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-    h1 { font-family: 'Fredoka', cursive; font-size: 2.2rem; color: var(--accent); margin-bottom: 6px; }
-    h2 { font-family: 'Fredoka', cursive; font-size: 1.5rem; margin-bottom: 8px; color: var(--purple); }
-    p { font-size: 0.92rem; line-height: 1.6; color: var(--subtext); margin-bottom: 14px; }
+    h1 { font-family: 'Playfair Display', serif; font-size: 2.3rem; background: linear-gradient(135deg, #f472b6, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
+    h2 { font-size: 1.4rem; color: #f1f5f9; margin-bottom: 10px; font-weight: 600; }
+    p { font-size: 0.92rem; line-height: 1.6; color: var(--text-sub); margin-bottom: 16px; }
 
     .btn { 
-      background: linear-gradient(135deg, #f43f5e, #e11d48); 
+      background: linear-gradient(135deg, #ec4899, #8b5cf6); 
       color: white; 
       border: none; 
-      padding: 13px 22px; 
+      padding: 14px 24px; 
       border-radius: 50px; 
       font-weight: 600; 
       font-size: 0.95rem; 
@@ -65,245 +72,225 @@
       margin-top: 10px; 
       cursor: pointer; 
       transition: all 0.2s ease;
-      box-shadow: 0 4px 14px rgba(244, 63, 94, 0.3);
+      box-shadow: 0 4px 20px var(--accent-glow);
     }
     .btn:active { transform: scale(0.97); }
 
-    /* Meme Visual Cards */
-    .meme-card {
-      background: #faf5ff;
-      border: 2px solid #f3e8ff;
+    /* Trendy Spotify-style Wrapped Cards */
+    .wrapped-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 20px;
-      padding: 14px;
+      padding: 16px;
       margin: 8px 0;
       width: 100%;
       text-align: left;
-      box-shadow: 0 4px 10px rgba(139, 92, 246, 0.05);
     }
-    .meme-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .wrapped-tag {
+      font-size: 0.7rem;
       font-weight: 700;
-      color: var(--purple);
-      font-size: 0.95rem;
-      margin-bottom: 6px;
-    }
-    .meme-box {
-      background: #ffffff;
-      border: 1px dashed #d8b4fe;
-      border-radius: 12px;
-      padding: 10px 12px;
-      font-size: 0.85rem;
-      color: #475569;
-      line-height: 1.5;
-    }
-    .meme-tag {
-      display: inline-block;
-      background: #fecdd3;
-      color: #9f1239;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 10px;
+      letter-spacing: 1px;
+      color: var(--accent);
+      text-transform: uppercase;
       margin-bottom: 4px;
+      display: block;
     }
+    .wrapped-title { font-size: 1rem; font-weight: 600; color: #f8fafc; margin-bottom: 4px; }
+    .wrapped-desc { font-size: 0.85rem; color: var(--text-sub); line-height: 1.5; }
 
-    /* Game Area */
-    .game-area {
+    /* Photo Upload Box (100% Client-side & Secure) */
+    .photo-frame {
       width: 100%;
-      height: 170px;
-      background: #fff1f2;
-      border: 2px dashed #fecdd3;
+      height: 180px;
+      background: rgba(255,255,255,0.03);
+      border: 2px dashed rgba(236, 72, 153, 0.4);
       border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
       position: relative;
       overflow: hidden;
       margin: 10px 0;
-      cursor: pointer;
+      transition: 0.3s;
     }
-    .floating-item {
-      position: absolute;
-      font-size: 2.2rem;
+    .photo-frame:hover { border-color: var(--accent); background: rgba(236, 72, 153, 0.05); }
+    .photo-frame img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+
+    /* Puzzle Game Grid */
+    .puzzle-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      width: 210px;
+      height: 210px;
+      margin: 12px auto;
+    }
+    .tile {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      cursor: pointer;
       user-select: none;
-      cursor: pointer;
-      animation: fall 2.2s linear infinite;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: 0.2s;
     }
-    @keyframes fall {
-      0% { top: -40px; }
-      100% { top: 190px; }
-    }
-
-    /* Secret Card Box */
-    .note-box {
-      background: #fffbeb;
-      border: 2px solid #fef08a;
-      padding: 18px;
-      border-radius: 20px;
-      width: 100%;
-      margin: 10px 0;
-      text-align: left;
-    }
-
-    /* Cake */
-    .cake { font-size: 5rem; cursor: pointer; margin: 12px 0; position: relative; display: inline-block; }
-    .candle { position: absolute; top: -12px; left: 42%; font-size: 1.6rem; animation: float 0.8s infinite alternate; }
-    @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-5px); } }
+    .tile.empty { background: rgba(255,255,255,0.05); box-shadow: none; cursor: default; }
 
     /* Music Button */
     .music-btn { 
-      position: absolute; 
-      top: 16px; 
-      right: 16px; 
-      background: #fff1f2; 
+      background: rgba(255, 255, 255, 0.08); 
       padding: 6px 14px; 
       border-radius: 20px; 
       font-size: 0.78rem; 
-      border: 1px solid #fecdd3; 
-      color: var(--accent); 
+      border: 1px solid rgba(255,255,255,0.15); 
+      color: var(--text-main); 
       cursor: pointer; 
-      font-weight: 600;
+      font-weight: 500;
       display: flex;
       align-items: center;
       gap: 6px;
-      z-index: 10;
+      align-self: flex-end;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
 
   <div class="app-container">
-    <button class="music-btn" onclick="toggleTune()">
-      <span id="musicIcon">🎵</span> <span id="musicText">Play Fairy Music</span>
-    </button>
+    <div>
+      <!-- Instagram Story Progress Bars -->
+      <div class="story-progress">
+        <div class="progress-bar" id="p1"><div class="progress-fill"></div></div>
+        <div class="progress-bar" id="p2"><div class="progress-fill"></div></div>
+        <div class="progress-bar" id="p3"><div class="progress-fill"></div></div>
+        <div class="progress-bar" id="p4"><div class="progress-fill"></div></div>
+        <div class="progress-bar" id="p5"><div class="progress-fill"></div></div>
+      </div>
 
-    <!-- SLIDE 1: Fairy Welcome -->
+      <button class="music-btn" onclick="toggleTune()">
+        <span id="musicIcon">🎵</span> <span id="musicText">Ambient Birthday Tune</span>
+      </button>
+    </div>
+
+    <!-- SLIDE 1: Trendy Intro -->
     <div class="section active" id="slide1">
-      <div style="font-size: 2.8rem; margin-bottom: 5px;">👑✨</div>
-      <h1>Happy Birthday Priya!</h1>
-      <p>Aapke liye ek choti si fairy-tale style journey hai. Ready ho?</p>
-      <button class="btn" onclick="startJourney(2)">Panna Palto ➔</button>
+      <div style="font-size: 3rem; margin-bottom: 10px;">⚡✨</div>
+      <h1>Priya's Wrapped '26</h1>
+      <p>Super sharp mind, fitness freak & low-key mysterious vibe! Ready for your birthday story?</p>
+      
+      <!-- Secure Client-Side Photo Frame -->
+      <div class="photo-frame" onclick="document.getElementById('photoInput').click()">
+        <img id="userPhotoPreview" style="display:none;" />
+        <span id="uploadHint" style="font-size: 0.85rem; color: var(--text-sub);">📷 Tap to add a Memory Photo<br><small style="font-size:0.7rem; color:#64748b;">(100% Private - Stays on your phone)</small></span>
+      </div>
+      <input type="file" id="photoInput" accept="image/*" style="display:none;" onchange="loadPhoto(event)">
+
+      <button class="btn" onclick="startStory(2)">Start Story ➔</button>
     </div>
 
-    <!-- SLIDE 2: Memes & Fairy Tale Stories (Bachpan & Delayed Plans) -->
+    <!-- SLIDE 2: Personality & Gym Traits -->
     <div class="section" id="slide2">
-      <h2>Fairy Tale vs Reality 🏰</h2>
-      <p>Aapki life ke kuch super relatable chapters:</p>
-
-      <!-- Meme Card 1 -->
-      <div class="meme-card">
-        <span class="meme-tag">MEME #1</span>
-        <div class="meme-header">🗺️ The Eternal Plan Delay</div>
-        <div class="meme-box">
-          <b>Expectation:</b> "Is weekend ghoomne chalte hain!" 🚗💨<br>
-          <b>Reality:</b> "Agle month pakka scene banate hain..." <i>(and loop repeats forever ♾️)</i>
-        </div>
+      <h2>The Priya Personality Traits 🧘‍♀️💪</h2>
+      
+      <div class="wrapped-card">
+        <span class="wrapped-tag">TRAIT #1 • FITNESS FREAK</span>
+        <div class="wrapped-title">"Mera Gym Ka Time Ho Gaya!" 🏋️‍♀️</div>
+        <div class="wrapped-desc">Kitna bhi busy schedule ho, gym ke routine ke sath koi compromise nahi. Dedicated level: 100!</div>
       </div>
 
-      <!-- Meme Card 2 -->
-      <div class="meme-card">
-        <span class="meme-tag">MEME #2</span>
-        <div class="meme-header">🐣 Bachpan Ki Memories</div>
-        <div class="meme-box">
-          <b>Childhood:</b> "Bade hoke roz party karenge aur har din ghoominge!" 🥳<br>
-          <b>Adulthood:</b> "Ghar pe shaanti se chai/coffee mil jaye, bass wahi party hai." ☕🛋️
-        </div>
+      <div class="wrapped-card">
+        <span class="wrapped-tag">TRAIT #2 • MYSTERIOUS & SHARP</span>
+        <div class="wrapped-title">Silent Genius 🧠</div>
+        <div class="wrapped-desc">Feelings shayad kam hi share karti ho, par mind full sharp hai! Sab samajhti ho bina bole.</div>
       </div>
 
-      <!-- Meme Card 3 -->
-      <div class="meme-card">
-        <span class="meme-tag">MEME #3</span>
-        <div class="meme-header">🍰 Birthday Party Scene</div>
-        <div class="meme-box">
-          "Party kahan hai?" bolne wale 100 log ready hain, par location decide karne mein 3 din lagenge! 🍕🍔
-        </div>
+      <div class="wrapped-card">
+        <span class="wrapped-tag">TRAIT #3 • FOOD Cravings</span>
+        <div class="wrapped-title">Food Cravings vs Focus 🍕</div>
+        <div class="wrapped-desc">Kaam aur focus mein itni khoti ho ki kabhi kabhi khana hi bhool jati ho!</div>
       </div>
 
-      <button class="btn" onclick="nextSlide(3)">Game Khele? ➔</button>
+      <button class="btn" onclick="nextSlide(3)">Solve the Puzzle ➔</button>
     </div>
 
-    <!-- SLIDE 3: Catching Game (Gifts & Stars) -->
+    <!-- SLIDE 3: Interactive Puzzle Game -->
     <div class="section" id="slide3">
-      <div style="font-size: 2.2rem; margin-bottom: 5px;">🎮</div>
-      <h2>Catch the Wishing Stars</h2>
-      <p>Aage badhne ke liye 3 stars catch kar lo jaldi se!</p>
+      <div style="font-size: 2.2rem; margin-bottom: 5px;">🧩</div>
+      <h2>Puzzle Lover Special!</h2>
+      <p>Numbers ko sequence (1 to 8) mein arrange karo:</p>
 
-      <div class="game-area" id="gameArea">
-        <div class="floating-item" id="star" style="left: 42%;" onclick="catchStar()">⭐</div>
-      </div>
+      <div class="puzzle-grid" id="puzzleGrid"></div>
 
-      <p style="font-weight:600; color:var(--accent); margin-top: 5px;">Score: <span id="starScore">0</span> / 3</p>
+      <p style="font-size:0.8rem; color:var(--gold);" id="puzzleStatus">Tap adjacent tiles to move</p>
 
-      <button class="btn" id="btnGameNext" style="display:none; margin-top:10px;" onclick="nextSlide(4)">Secret Note Unlock Karo ➔</button>
+      <button class="btn" id="btnPuzzleNext" onclick="nextSlide(4)">Unlock Secret Note ➔</button>
     </div>
 
-    <!-- SLIDE 4: Secret Note (Friend-Zone + Respectful Balance) -->
+    <!-- SLIDE 4: Secret Note (Respectful & Warm) -->
     <div class="section" id="slide4">
       <div style="font-size: 2.5rem; margin-bottom: 5px;">💌</div>
-      <h2>A Quick Note For You</h2>
+      <h2>A Genuine Note</h2>
       
-      <div class="note-box">
-        <p style="color: #334155; font-size: 0.93rem; line-height: 1.7; margin: 0; font-weight: 500;">
-          Priya, aapke sath baat karke hamesha ek super chill aur sorted vibe aati hai. Aap jis tarah se relaxed aur calm rehti ho, wo sach mein kaafi cool hai! High-five for being such an awesome friend. Is saal saare delayed plans finally successful ho jayein! ✨
+      <div class="wrapped-card" style="border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.05);">
+        <p style="color: #f1f5f9; font-size: 0.93rem; line-height: 1.8; margin: 0;">
+          Priya, aapke sath conversation hamesha super smooth aur positive rehti hai. Aap jis tarah se har cheez ko calm, smart aur dedicated tarike se handle karti ho, wo sach mein bohot inspiring hai. Aise hi hamesha amazing aur awesome raho! Wish you all the happiness! ✨🌸
         </p>
       </div>
 
-      <button class="btn" style="margin-top: 10px;" onclick="nextSlide(5)">Cake Cutting Time 🎂</button>
+      <button class="btn" style="margin-top: 15px;" onclick="nextSlide(5)">Cake Time 🎂</button>
     </div>
 
-    <!-- SLIDE 5: Virtual Cake -->
+    <!-- SLIDE 5: Final Celebration -->
     <div class="section" id="slide5">
-      <h2>🎂 Wish Maango & Blow Candle!</h2>
-      <p>Cake par tap karke candle bujhao:</p>
-
-      <div class="cake" onclick="cutCake()">
-        <span class="candle" id="flame">🕯️</span>
-        🎂
-      </div>
-
-      <p style="font-size: 0.82rem; color: var(--accent); font-weight: 600;">*Tap the cake to cut*</p>
-    </div>
-
-    <!-- SLIDE 6: Final Grand Wish -->
-    <div class="section" id="slide6">
-      <div style="font-size: 2.8rem; margin-bottom: 5px;">🎉 🥂</div>
+      <div style="font-size: 3rem; margin-bottom: 10px;">🎂 🎉</div>
       <h1>Happy Birthday, Priya!</h1>
 
-      <div class="note-box" style="text-align: center; margin: 15px 0; background: #fff1f2; border-color: #fecdd3;">
-        <p style="color: #334155; font-size: 0.92rem; line-height: 1.7; margin: 0; font-weight: 500;">
-          Wish you a wonderful year ahead filled with happiness, peace, badhiya khana, aur bhot saari success! Enjoy your day to the fullest! 🌸✨
+      <div class="wrapped-card" style="text-align: center; margin: 15px 0;">
+        <p style="color: #f8fafc; font-size: 0.92rem; line-height: 1.7; margin: 0;">
+          May this year bring you endless good vibes, peak fitness gains, solved puzzles, and lots of delicious food! Have a fantastic day ahead! 🥂✨
         </p>
       </div>
 
-      <button class="btn" onclick="triggerConfetti()">Celebrate Again 🎊</button>
+      <button class="btn" onclick="triggerConfetti()">Blow Confetti 🎊</button>
     </div>
+
+    <div style="font-size:0.7rem; color:#475569; margin-top:10px;">Tap anywhere to advance • Pure Aesthetic Vibe</div>
   </div>
 
   <script>
-    let starScore = 0;
+    let currentSlide = 1;
     let audioCtx = null;
     let isPlaying = false;
     let timerId = null;
 
-    // Super Soft & Cute Music Box Melody
-    const tuneNotes = [
-      523.25, 523.25, 587.33, 523.25, 698.46, 659.25,
-      523.25, 523.25, 587.33, 523.25, 783.99, 698.46,
-      523.25, 523.25, 1046.50, 880.00, 698.46, 659.25, 587.33
+    // Soft Acoustic Chimes Birthday Melody (Web Audio API)
+    const melodyNotes = [
+      329.63, 329.63, 369.99, 329.63, 440.00, 415.30,
+      329.63, 329.63, 369.99, 329.63, 493.88, 440.00,
+      329.63, 329.63, 659.25, 554.37, 440.00, 415.30, 369.99
     ];
     let noteIdx = 0;
 
-    function playNote(freq) {
+    function playSoftNote(freq) {
       if(!audioCtx) return;
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
-      osc.type = 'sine'; // Soft sine wave for music box sound
+      osc.type = 'sine'; // Super smooth acoustic wave
       osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-      gain.gain.setValueAtTime(0.04, audioCtx.currentTime); // Very gentle volume
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.8);
+      gain.gain.setValueAtTime(0.03, audioCtx.currentTime); // Gentle ambient volume
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.2);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
       osc.start();
-      osc.stop(audioCtx.currentTime + 0.8);
+      osc.stop(audioCtx.currentTime + 1.2);
     }
 
     function toggleTune() {
@@ -316,55 +303,109 @@
 
       if(!isPlaying) {
         isPlaying = true;
-        document.getElementById('musicText').innerText = "Playing Tune 🎶";
+        document.getElementById('musicText').innerText = "Playing Melody 🎶";
         timerId = setInterval(() => {
-          playNote(tuneNotes[noteIdx]);
-          noteIdx = (noteIdx + 1) % tuneNotes.length;
-        }, 420);
+          playSoftNote(melodyNotes[noteIdx]);
+          noteIdx = (noteIdx + 1) % melodyNotes.length;
+        }, 500);
       } else {
         isPlaying = false;
-        document.getElementById('musicText').innerText = "Play Fairy Music";
+        document.getElementById('musicText').innerText = "Ambient Birthday Tune";
         clearInterval(timerId);
       }
     }
 
-    function startJourney(nextStep) {
+    function startStory(slide) {
       if(!isPlaying) toggleTune();
-      nextSlide(nextStep);
-    }
-
-    function catchStar() {
-      if(!isPlaying) toggleTune();
-      starScore++;
-      document.getElementById('starScore').innerText = starScore;
-      confetti({ particleCount: 20, spread: 40, origin: { y: 0.6 } });
-
-      const star = document.getElementById('star');
-      const randomLeft = Math.floor(Math.random() * 70) + 10;
-      star.style.left = randomLeft + '%';
-
-      if(starScore >= 3) {
-        star.style.display = 'none';
-        document.getElementById('btnGameNext').style.display = 'block';
-      }
+      nextSlide(slide);
     }
 
     function nextSlide(slideNum) {
-      if(!isPlaying) toggleTune();
+      if(!isPlaying && audioCtx) toggleTune();
+      currentSlide = slideNum;
+      
+      // Update story progress bar UI
+      for(let i = 1; i <= 5; i++) {
+        const bar = document.getElementById('p' + i);
+        if(i < slideNum) {
+          bar.classList.add('completed');
+        } else if(i === slideNum) {
+          bar.classList.remove('completed');
+          bar.querySelector('.progress-fill').style.width = '100%';
+        } else {
+          bar.classList.remove('completed');
+          bar.querySelector('.progress-fill').style.width = '0%';
+        }
+      }
+
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       document.getElementById('slide' + slideNum).classList.add('active');
+
+      if(slideNum === 5) triggerConfetti();
     }
 
-    function cutCake() {
-      if(!isPlaying) toggleTune();
-      document.getElementById('flame').style.display = 'none';
-      confetti({ particleCount: 160, spread: 90, origin: { y: 0.5 } });
-      setTimeout(() => nextSlide(6), 1000);
+    // Photo Preview Handler (Secure local blob)
+    function loadPhoto(event) {
+      const file = event.target.files[0];
+      if(file) {
+        const url = URL.createObjectURL(file);
+        const img = document.getElementById('userPhotoPreview');
+        img.src = url;
+        img.style.display = 'block';
+        document.getElementById('uploadHint').style.display = 'none';
+      }
+    }
+
+    // 3x3 Sliding Tile Puzzle Logic
+    let tiles = [1, 2, 3, 4, 5, 6, 7, 8, ""];
+    
+    function initPuzzle() {
+      // Shuffle tiles solvable
+      tiles = [1, 2, 3, 4, 6, 8, 7, 5, ""];
+      renderPuzzle();
+    }
+
+    function renderPuzzle() {
+      const grid = document.getElementById('puzzleGrid');
+      grid.innerHTML = "";
+      tiles.forEach((tile, idx) => {
+        const tileDiv = document.createElement('div');
+        tileDiv.className = 'tile' + (tile === "" ? " empty" : "");
+        tileDiv.innerText = tile;
+        tileDiv.onclick = () => moveTile(idx);
+        grid.appendChild(tileDiv);
+      });
+    }
+
+    function moveTile(idx) {
+      const emptyIdx = tiles.indexOf("");
+      const validMoves = [idx - 1, idx + 1, idx - 3, idx + 3];
+      
+      if(validMoves.includes(emptyIdx)) {
+        // Prevent wrapping around grid edges
+        if ((idx % 3 === 0 && emptyIdx === idx - 1) || (idx % 3 === 2 && emptyIdx === idx + 1)) return;
+        
+        tiles[emptyIdx] = tiles[idx];
+        tiles[idx] = "";
+        renderPuzzle();
+        checkPuzzleWin();
+      }
+    }
+
+    function checkPuzzleWin() {
+      const winSequence = [1, 2, 3, 4, 5, 6, 7, 8, ""];
+      if(JSON.stringify(tiles) === JSON.stringify(winSequence)) {
+        document.getElementById('puzzleStatus').innerText = "🎉 Solved! Brain Power 100/100!";
+        document.getElementById('puzzleStatus').style.color = "#4ade80";
+        confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
+      }
     }
 
     function triggerConfetti() {
-      confetti({ particleCount: 220, spread: 100, origin: { y: 0.6 } });
+      confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
     }
+
+    initPuzzle();
   </script>
 </body>
 </html>
