@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Priya | Birthday Edition ✨</title>
+  <title>Bestie Birthday Edition ✨</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0f172a;
-      --card-bg: rgba(30, 41, 59, 0.7);
-      --accent: #ec4899;
-      --accent-glow: rgba(236, 72, 153, 0.35);
+      --bg: #0b0f19;
+      --card-bg: rgba(22, 29, 47, 0.75);
+      --accent: #f43f5e;
+      --accent-glow: rgba(244, 63, 94, 0.35);
       --purple: #a855f7;
+      --cyan: #06b6d4;
       --text-main: #f8fafc;
       --text-sub: #94a3b8;
-      --gold: #f59e0b;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
-      background: #090d16;
+      background: #05070d;
       color: var(--text-main); 
       font-family: 'Outfit', sans-serif;
       min-height: 100vh; 
@@ -32,41 +32,41 @@
     .app-container { 
       width: 100%; 
       max-width: 420px; 
-      background: radial-gradient(circle at top left, #1e1b4b, #0f172a 70%); 
+      background: radial-gradient(circle at top, #1e1b4b 0%, #0b0f19 80%); 
       border-radius: 32px; 
       padding: 24px 20px; 
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px var(--accent-glow); 
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(168, 85, 247, 0.2); 
       position: relative; 
       overflow: hidden; 
-      min-height: 640px; 
+      min-height: 650px; 
       display: flex; 
       flex-direction: column; 
       justify-content: space-between; 
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
     }
 
-    /* Instagram Progress Indicator */
-    .story-progress { display: flex; gap: 5px; margin-bottom: 18px; }
-    .progress-bar { height: 3px; flex: 1; background: rgba(255,255,255,0.2); border-radius: 3px; overflow: hidden; }
-    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #ec4899, #a855f7); transition: width 0.3s ease; }
+    /* Instagram Story Progress Indicator */
+    .story-progress { display: flex; gap: 5px; margin-bottom: 16px; }
+    .progress-bar { height: 3px; flex: 1; background: rgba(255,255,255,0.15); border-radius: 3px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #f43f5e, #a855f7); transition: width 0.3s ease; }
     .progress-bar.completed .progress-fill { width: 100%; }
 
-    .section { display: none; flex-direction: column; align-items: center; text-align: center; animation: slideUp 0.4s ease-out; width: 100%; height: 100%; flex-grow: 1; justify-content: center; }
+    .section { display: none; flex-direction: column; align-items: center; text-align: center; animation: fadeIn 0.4s ease-out; width: 100%; flex-grow: 1; justify-content: center; }
     .section.active { display: flex; }
 
-    @keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
 
-    h1 { font-family: 'Playfair Display', serif; font-size: 2.3rem; background: linear-gradient(135deg, #f472b6, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
-    h2 { font-size: 1.4rem; color: #f1f5f9; margin-bottom: 10px; font-weight: 600; }
+    h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.2rem; font-weight: 800; background: linear-gradient(135deg, #fb7185, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
+    h2 { font-size: 1.4rem; color: #f1f5f9; margin-bottom: 10px; font-weight: 700; }
     p { font-size: 0.92rem; line-height: 1.6; color: var(--text-sub); margin-bottom: 16px; }
 
     .btn { 
-      background: linear-gradient(135deg, #ec4899, #8b5cf6); 
+      background: linear-gradient(135deg, #f43f5e, #8b5cf6); 
       color: white; 
       border: none; 
       padding: 14px 24px; 
       border-radius: 50px; 
-      font-weight: 600; 
+      font-weight: 700; 
       font-size: 0.95rem; 
       width: 100%; 
       margin-top: 10px; 
@@ -79,32 +79,33 @@
     /* Trendy Spotify-style Wrapped Cards */
     .wrapped-card {
       background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 20px;
-      padding: 16px;
-      margin: 8px 0;
+      padding: 15px;
+      margin: 6px 0;
       width: 100%;
       text-align: left;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
     .wrapped-tag {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: var(--accent);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      color: #f43f5e;
       text-transform: uppercase;
       margin-bottom: 4px;
       display: block;
     }
-    .wrapped-title { font-size: 1rem; font-weight: 600; color: #f8fafc; margin-bottom: 4px; }
+    .wrapped-title { font-size: 1rem; font-weight: 700; color: #f8fafc; margin-bottom: 4px; }
     .wrapped-desc { font-size: 0.85rem; color: var(--text-sub); line-height: 1.5; }
 
     /* Photo Upload Box (100% Client-side & Secure) */
     .photo-frame {
       width: 100%;
-      height: 180px;
-      background: rgba(255,255,255,0.03);
-      border: 2px dashed rgba(236, 72, 153, 0.4);
+      height: 170px;
+      background: rgba(255,255,255,0.02);
+      border: 2px dashed rgba(244, 63, 94, 0.4);
       border-radius: 20px;
       display: flex;
       flex-direction: column;
@@ -116,35 +117,36 @@
       margin: 10px 0;
       transition: 0.3s;
     }
-    .photo-frame:hover { border-color: var(--accent); background: rgba(236, 72, 153, 0.05); }
+    .photo-frame:hover { border-color: var(--accent); background: rgba(244, 63, 94, 0.05); }
     .photo-frame img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
 
-    /* Puzzle Game Grid */
-    .puzzle-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      width: 210px;
-      height: 210px;
-      margin: 12px auto;
+    /* Balloon Pop Game Area */
+    .balloon-area {
+      width: 100%;
+      height: 200px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 2px dashed rgba(168, 85, 247, 0.4);
+      border-radius: 22px;
+      position: relative;
+      overflow: hidden;
+      margin: 10px 0;
     }
-    .tile {
-      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-      color: white;
-      font-size: 1.2rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
+    .balloon {
+      position: absolute;
+      font-size: 2.5rem;
       cursor: pointer;
       user-select: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: 0.2s;
+      animation: floatUp 3s linear infinite;
+      transition: transform 0.1s;
     }
-    .tile.empty { background: rgba(255,255,255,0.05); box-shadow: none; cursor: default; }
+    .balloon:active { transform: scale(1.3); }
 
-    /* Music Button */
+    @keyframes floatUp {
+      0% { bottom: -50px; opacity: 1; }
+      100% { bottom: 220px; opacity: 0.8; }
+    }
+
+    /* Music Control Button */
     .music-btn { 
       background: rgba(255, 255, 255, 0.08); 
       padding: 6px 14px; 
@@ -153,7 +155,7 @@
       border: 1px solid rgba(255,255,255,0.15); 
       color: var(--text-main); 
       cursor: pointer; 
-      font-weight: 500;
+      font-weight: 600;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -166,7 +168,7 @@
 
   <div class="app-container">
     <div>
-      <!-- Instagram Story Progress Bars -->
+      <!-- Story Progress Bars -->
       <div class="story-progress">
         <div class="progress-bar" id="p1"><div class="progress-fill"></div></div>
         <div class="progress-bar" id="p2"><div class="progress-fill"></div></div>
@@ -176,93 +178,97 @@
       </div>
 
       <button class="music-btn" onclick="toggleTune()">
-        <span id="musicIcon">🎵</span> <span id="musicText">Ambient Birthday Tune</span>
+        <span id="musicIcon">🎵</span> <span id="musicText">Soothing Birthday Tune</span>
       </button>
     </div>
 
-    <!-- SLIDE 1: Trendy Intro -->
+    <!-- SLIDE 1: Intro -->
     <div class="section active" id="slide1">
-      <div style="font-size: 3rem; margin-bottom: 10px;">⚡✨</div>
-      <h1>Priya's Wrapped '26</h1>
-      <p>Super sharp mind, fitness freak & low-key mysterious vibe! Ready for your birthday story?</p>
+      <div style="font-size: 3rem; margin-bottom: 10px;">👑✨</div>
+      <h1>Birthday Special</h1>
+      <p>Low-key mysterious vibe, super sharp mind & pure fitness enthusiast! Ready to check your story?</p>
       
       <!-- Secure Client-Side Photo Frame -->
       <div class="photo-frame" onclick="document.getElementById('photoInput').click()">
         <img id="userPhotoPreview" style="display:none;" />
-        <span id="uploadHint" style="font-size: 0.85rem; color: var(--text-sub);">📷 Tap to add a Memory Photo<br><small style="font-size:0.7rem; color:#64748b;">(100% Private - Stays on your phone)</small></span>
+        <span id="uploadHint" style="font-size: 0.85rem; color: var(--text-sub);">📷 Tap to add a Memory Photo<br><small style="font-size:0.7rem; color:#64748b;">(100% Secure - Stays in your browser)</small></span>
       </div>
       <input type="file" id="photoInput" accept="image/*" style="display:none;" onchange="loadPhoto(event)">
 
-      <button class="btn" onclick="startStory(2)">Start Story ➔</button>
+      <button class="btn" onclick="startStory(2)">Panna Palto ➔</button>
     </div>
 
-    <!-- SLIDE 2: Personality & Gym Traits -->
+    <!-- SLIDE 2: Modified Traits (Gym, Smartness & Food Teasing) -->
     <div class="section" id="slide2">
-      <h2>The Priya Personality Traits 🧘‍♀️💪</h2>
+      <h2>The Bestie Vibe Checklist ⚡</h2>
       
       <div class="wrapped-card">
-        <span class="wrapped-tag">TRAIT #1 • FITNESS FREAK</span>
+        <span class="wrapped-tag">TRAIT #1 • GYM FREAKER</span>
         <div class="wrapped-title">"Mera Gym Ka Time Ho Gaya!" 🏋️‍♀️</div>
-        <div class="wrapped-desc">Kitna bhi busy schedule ho, gym ke routine ke sath koi compromise nahi. Dedicated level: 100!</div>
+        <div class="wrapped-desc">Kitna bhi busy din ho ya important kaam, gym ke routine ke sath koi compromise nahi! Pure dedication!</div>
       </div>
 
       <div class="wrapped-card">
         <span class="wrapped-tag">TRAIT #2 • MYSTERIOUS & SHARP</span>
-        <div class="wrapped-title">Silent Genius 🧠</div>
-        <div class="wrapped-desc">Feelings shayad kam hi share karti ho, par mind full sharp hai! Sab samajhti ho bina bole.</div>
+        <div class="wrapped-title">Quietly Intelligent 🧠</div>
+        <div class="wrapped-desc">Apni feelings shayad kam hi share karo, par mind ekdum sharp hai. Har baat bina bole samajhna aata hai!</div>
       </div>
 
       <div class="wrapped-card">
         <span class="wrapped-tag">TRAIT #3 • FOOD Cravings</span>
-        <div class="wrapped-title">Food Cravings vs Focus 🍕</div>
-        <div class="wrapped-desc">Kaam aur focus mein itni khoti ho ki kabhi kabhi khana hi bhool jati ho!</div>
+        <div class="wrapped-title">Focus Level: 100 🍕</div>
+        <div class="wrapped-desc">Apne kaam aur focus mein itni kho jaati ho ki kabhi kabhi khana khana hi bhool jaati ho!</div>
       </div>
 
-      <button class="btn" onclick="nextSlide(3)">Solve the Puzzle ➔</button>
+      <button class="btn" onclick="nextSlide(3)">Pop Balloons ➔</button>
     </div>
 
-    <!-- SLIDE 3: Interactive Puzzle Game -->
+    <!-- SLIDE 3: Balloon Pop Game -->
     <div class="section" id="slide3">
-      <div style="font-size: 2.2rem; margin-bottom: 5px;">🧩</div>
-      <h2>Puzzle Lover Special!</h2>
-      <p>Numbers ko sequence (1 to 8) mein arrange karo:</p>
+      <div style="font-size: 2.2rem; margin-bottom: 5px;">🎈</div>
+      <h2>Pop the Birthday Balloons!</h2>
+      <p>Celebration unlock karne ke liye 3 balloons pop karo!</p>
 
-      <div class="puzzle-grid" id="puzzleGrid"></div>
+      <div class="balloon-area" id="balloonArea">
+        <div class="balloon" id="b1" style="left: 15%; animation-delay: 0s;" onclick="popBalloon('b1')">🎈</div>
+        <div class="balloon" id="b2" style="left: 45%; animation-delay: 1s;" onclick="popBalloon('b2')">🎈</div>
+        <div class="balloon" id="b3" style="left: 72%; animation-delay: 1.8s;" onclick="popBalloon('b3')">🎈</div>
+      </div>
 
-      <p style="font-size:0.8rem; color:var(--gold);" id="puzzleStatus">Tap adjacent tiles to move</p>
+      <p style="font-weight:700; color:var(--cyan); margin-top: 5px;">Popped: <span id="popScore">0</span> / 3</p>
 
-      <button class="btn" id="btnPuzzleNext" onclick="nextSlide(4)">Unlock Secret Note ➔</button>
+      <button class="btn" id="btnGameNext" style="display:none; margin-top:10px;" onclick="nextSlide(4)">Bestfriend Note Unlock ➔</button>
     </div>
 
-    <!-- SLIDE 4: Secret Note (Respectful & Warm) -->
+    <!-- SLIDE 4: Bestfriend to Bestfriend Note (General & Pure) -->
     <div class="section" id="slide4">
       <div style="font-size: 2.5rem; margin-bottom: 5px;">💌</div>
-      <h2>A Genuine Note</h2>
+      <h2>Bestfriend Note</h2>
       
-      <div class="wrapped-card" style="border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.05);">
-        <p style="color: #f1f5f9; font-size: 0.93rem; line-height: 1.8; margin: 0;">
-          Priya, aapke sath conversation hamesha super smooth aur positive rehti hai. Aap jis tarah se har cheez ko calm, smart aur dedicated tarike se handle karti ho, wo sach mein bohot inspiring hai. Aise hi hamesha amazing aur awesome raho! Wish you all the happiness! ✨🌸
+      <div class="wrapped-card" style="border-color: rgba(244, 63, 94, 0.3); background: rgba(244, 63, 94, 0.06); padding: 18px;">
+        <p style="color: #f1f5f9; font-size: 0.93rem; line-height: 1.8; margin: 0; font-weight: 500;">
+          Tere sath baat karke hamesha ek super chill, genuine aur comfortable vibe aati hai. Tu jis tarah se har cheez ko calm, smart aur dedicatedly handle karti hai, wo sach mein bohot awesome hai! Thanks for being such an incredible best friend. Tu humesha aise hi cool, sorted aur amazing rehna! ✨🌸
         </p>
       </div>
 
-      <button class="btn" style="margin-top: 15px;" onclick="nextSlide(5)">Cake Time 🎂</button>
+      <button class="btn" style="margin-top: 15px;" onclick="nextSlide(5)">Cake & Wishes 🎂</button>
     </div>
 
     <!-- SLIDE 5: Final Celebration -->
     <div class="section" id="slide5">
-      <div style="font-size: 3rem; margin-bottom: 10px;">🎂 🎉</div>
-      <h1>Happy Birthday, Priya!</h1>
+      <div style="font-size: 3rem; margin-bottom: 10px;">🎂 🥂</div>
+      <h1>Happy Birthday!</h1>
 
-      <div class="wrapped-card" style="text-align: center; margin: 15px 0;">
-        <p style="color: #f8fafc; font-size: 0.92rem; line-height: 1.7; margin: 0;">
-          May this year bring you endless good vibes, peak fitness gains, solved puzzles, and lots of delicious food! Have a fantastic day ahead! 🥂✨
+      <div class="wrapped-card" style="text-align: center; margin: 15px 0; background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.3);">
+        <p style="color: #f8fafc; font-size: 0.93rem; line-height: 1.7; margin: 0; font-weight: 500;">
+          Wishing you a fantastic year filled with happiness, peace, great health, gym PRs, and endless good food! Have a wonderful day ahead! 🎉✨
         </p>
       </div>
 
-      <button class="btn" onclick="triggerConfetti()">Blow Confetti 🎊</button>
+      <button class="btn" onclick="triggerConfetti()">Celebrate Again 🎊</button>
     </div>
 
-    <div style="font-size:0.7rem; color:#475569; margin-top:10px;">Tap anywhere to advance • Pure Aesthetic Vibe</div>
+    <div style="font-size:0.72rem; color:#475569; margin-top:10px;">Bestfriend Special Edition • Ultra Clean Vibe</div>
   </div>
 
   <script>
@@ -270,12 +276,13 @@
     let audioCtx = null;
     let isPlaying = false;
     let timerId = null;
+    let poppedCount = 0;
 
-    // Soft Acoustic Chimes Birthday Melody (Web Audio API)
+    // Soothing Birthday Chime Tune (Web Audio API)
     const melodyNotes = [
-      329.63, 329.63, 369.99, 329.63, 440.00, 415.30,
-      329.63, 329.63, 369.99, 329.63, 493.88, 440.00,
-      329.63, 329.63, 659.25, 554.37, 440.00, 415.30, 369.99
+      392.00, 392.00, 440.00, 392.00, 523.25, 493.88,
+      392.00, 392.00, 440.00, 392.00, 587.33, 523.25,
+      392.00, 392.00, 783.99, 659.25, 523.25, 493.88, 440.00
     ];
     let noteIdx = 0;
 
@@ -283,14 +290,14 @@
       if(!audioCtx) return;
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
-      osc.type = 'sine'; // Super smooth acoustic wave
+      osc.type = 'sine'; // Pure acoustic sine wave
       osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-      gain.gain.setValueAtTime(0.03, audioCtx.currentTime); // Gentle ambient volume
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.2);
+      gain.gain.setValueAtTime(0.035, audioCtx.currentTime); // Perfect soft volume
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.0);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
       osc.start();
-      osc.stop(audioCtx.currentTime + 1.2);
+      osc.stop(audioCtx.currentTime + 1.0);
     }
 
     function toggleTune() {
@@ -307,10 +314,10 @@
         timerId = setInterval(() => {
           playSoftNote(melodyNotes[noteIdx]);
           noteIdx = (noteIdx + 1) % melodyNotes.length;
-        }, 500);
+        }, 450);
       } else {
         isPlaying = false;
-        document.getElementById('musicText').innerText = "Ambient Birthday Tune";
+        document.getElementById('musicText').innerText = "Soothing Birthday Tune";
         clearInterval(timerId);
       }
     }
@@ -344,7 +351,24 @@
       if(slideNum === 5) triggerConfetti();
     }
 
-    // Photo Preview Handler (Secure local blob)
+    // Balloon Pop Logic
+    function popBalloon(id) {
+      if(!isPlaying) toggleTune();
+      const b = document.getElementById(id);
+      if(b.style.visibility === 'hidden') return;
+
+      b.style.visibility = 'hidden';
+      poppedCount++;
+      document.getElementById('popScore').innerText = poppedCount;
+
+      confetti({ particleCount: 25, spread: 50, origin: { y: 0.6 } });
+
+      if(poppedCount >= 3) {
+        document.getElementById('btnGameNext').style.display = 'block';
+      }
+    }
+
+    // Photo Preview Handler (100% Client-side local blob)
     function loadPhoto(event) {
       const file = event.target.files[0];
       if(file) {
@@ -356,56 +380,9 @@
       }
     }
 
-    // 3x3 Sliding Tile Puzzle Logic
-    let tiles = [1, 2, 3, 4, 5, 6, 7, 8, ""];
-    
-    function initPuzzle() {
-      // Shuffle tiles solvable
-      tiles = [1, 2, 3, 4, 6, 8, 7, 5, ""];
-      renderPuzzle();
-    }
-
-    function renderPuzzle() {
-      const grid = document.getElementById('puzzleGrid');
-      grid.innerHTML = "";
-      tiles.forEach((tile, idx) => {
-        const tileDiv = document.createElement('div');
-        tileDiv.className = 'tile' + (tile === "" ? " empty" : "");
-        tileDiv.innerText = tile;
-        tileDiv.onclick = () => moveTile(idx);
-        grid.appendChild(tileDiv);
-      });
-    }
-
-    function moveTile(idx) {
-      const emptyIdx = tiles.indexOf("");
-      const validMoves = [idx - 1, idx + 1, idx - 3, idx + 3];
-      
-      if(validMoves.includes(emptyIdx)) {
-        // Prevent wrapping around grid edges
-        if ((idx % 3 === 0 && emptyIdx === idx - 1) || (idx % 3 === 2 && emptyIdx === idx + 1)) return;
-        
-        tiles[emptyIdx] = tiles[idx];
-        tiles[idx] = "";
-        renderPuzzle();
-        checkPuzzleWin();
-      }
-    }
-
-    function checkPuzzleWin() {
-      const winSequence = [1, 2, 3, 4, 5, 6, 7, 8, ""];
-      if(JSON.stringify(tiles) === JSON.stringify(winSequence)) {
-        document.getElementById('puzzleStatus').innerText = "🎉 Solved! Brain Power 100/100!";
-        document.getElementById('puzzleStatus').style.color = "#4ade80";
-        confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
-      }
-    }
-
     function triggerConfetti() {
-      confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+      confetti({ particleCount: 220, spread: 100, origin: { y: 0.6 } });
     }
-
-    initPuzzle();
   </script>
 </body>
 </html>
