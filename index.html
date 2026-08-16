@@ -5,23 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bestie Birthday Edition ✨</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b0f19;
-      --card-bg: rgba(22, 29, 47, 0.75);
+      --bg-start: #fdf2f8;
+      --bg-end: #f3e8ff;
+      --card-bg: #ffffff;
       --accent: #f43f5e;
-      --accent-glow: rgba(244, 63, 94, 0.35);
-      --purple: #a855f7;
-      --cyan: #06b6d4;
-      --text-main: #f8fafc;
-      --text-sub: #94a3b8;
+      --accent-glow: rgba(244, 63, 94, 0.15);
+      --purple: #8b5cf6;
+      --text-main: #1e293b;
+      --text-sub: #64748b;
+      --border-color: #fbcfe8;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
-      background: #05070d;
+      background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
       color: var(--text-main); 
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       min-height: 100vh; 
       display: flex; 
       justify-content: center; 
@@ -32,80 +33,87 @@
     .app-container { 
       width: 100%; 
       max-width: 420px; 
-      background: radial-gradient(circle at top, #1e1b4b 0%, #0b0f19 80%); 
+      background: var(--card-bg); 
       border-radius: 32px; 
       padding: 24px 20px; 
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(168, 85, 247, 0.2); 
+      box-shadow: 0 20px 40px rgba(244, 63, 94, 0.08); 
       position: relative; 
       overflow: hidden; 
       min-height: 650px; 
       display: flex; 
       flex-direction: column; 
       justify-content: space-between; 
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 2px solid var(--border-color);
     }
 
-    /* Instagram Story Progress Indicator */
+    /* Progress Indicators */
     .story-progress { display: flex; gap: 5px; margin-bottom: 16px; }
-    .progress-bar { height: 3px; flex: 1; background: rgba(255,255,255,0.15); border-radius: 3px; overflow: hidden; }
+    .progress-bar { height: 4px; flex: 1; background: #f1f5f9; border-radius: 4px; overflow: hidden; }
     .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #f43f5e, #a855f7); transition: width 0.3s ease; }
     .progress-bar.completed .progress-fill { width: 100%; }
 
     .section { display: none; flex-direction: column; align-items: center; text-align: center; animation: fadeIn 0.4s ease-out; width: 100%; flex-grow: 1; justify-content: center; }
     .section.active { display: flex; }
 
-    @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-    h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.2rem; font-weight: 800; background: linear-gradient(135deg, #fb7185, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
-    h2 { font-size: 1.4rem; color: #f1f5f9; margin-bottom: 10px; font-weight: 700; }
-    p { font-size: 0.92rem; line-height: 1.6; color: var(--text-sub); margin-bottom: 16px; }
+    h1 { font-family: 'Fredoka', cursive; font-size: 2.1rem; color: var(--accent); margin-bottom: 8px; }
+    h2 { font-family: 'Fredoka', cursive; font-size: 1.4rem; color: var(--purple); margin-bottom: 10px; }
+    p { font-size: 0.92rem; line-height: 1.6; color: var(--text-sub); margin-bottom: 14px; }
 
     .btn { 
-      background: linear-gradient(135deg, #f43f5e, #8b5cf6); 
+      background: linear-gradient(135deg, #f43f5e, #e11d48); 
       color: white; 
       border: none; 
       padding: 14px 24px; 
       border-radius: 50px; 
-      font-weight: 700; 
+      font-weight: 600; 
       font-size: 0.95rem; 
       width: 100%; 
       margin-top: 10px; 
       cursor: pointer; 
       transition: all 0.2s ease;
-      box-shadow: 0 4px 20px var(--accent-glow);
+      box-shadow: 0 4px 15px var(--accent-glow);
     }
     .btn:active { transform: scale(0.97); }
 
-    /* Trendy Spotify-style Wrapped Cards */
-    .wrapped-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Interactive Quiz Box Style */
+    .quiz-card {
+      background: #faf5ff;
+      border: 1.5px solid #e9d5ff;
       border-radius: 20px;
-      padding: 15px;
-      margin: 6px 0;
+      padding: 16px;
+      margin: 8px 0;
       width: 100%;
       text-align: left;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
-    .wrapped-tag {
-      font-size: 0.68rem;
-      font-weight: 800;
-      letter-spacing: 1.2px;
-      color: #f43f5e;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-      display: block;
+    .quiz-question { font-size: 0.92rem; font-weight: 700; color: #4c1d95; margin-bottom: 10px; }
+    .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+    .quiz-opt {
+      background: #ffffff;
+      border: 1px solid #ddd6fe;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      color: #334155;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
     }
-    .wrapped-title { font-size: 1rem; font-weight: 700; color: #f8fafc; margin-bottom: 4px; }
-    .wrapped-desc { font-size: 0.85rem; color: var(--text-sub); line-height: 1.5; }
+    .quiz-opt:hover { background: #f3e8ff; border-color: #c084fc; }
+    .quiz-feedback {
+      font-size: 0.82rem;
+      margin-top: 8px;
+      font-weight: 600;
+      min-height: 20px;
+    }
 
-    /* Photo Upload Box (100% Client-side & Secure) */
+    /* Photo Frame Style */
     .photo-frame {
       width: 100%;
       height: 170px;
-      background: rgba(255,255,255,0.02);
-      border: 2px dashed rgba(244, 63, 94, 0.4);
+      background: #fff1f2;
+      border: 2px dashed #fecdd3;
       border-radius: 20px;
       display: flex;
       flex-direction: column;
@@ -117,15 +125,14 @@
       margin: 10px 0;
       transition: 0.3s;
     }
-    .photo-frame:hover { border-color: var(--accent); background: rgba(244, 63, 94, 0.05); }
     .photo-frame img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
 
-    /* Balloon Pop Game Area */
+    /* Balloon Area */
     .balloon-area {
       width: 100%;
       height: 200px;
-      background: rgba(15, 23, 42, 0.6);
-      border: 2px dashed rgba(168, 85, 247, 0.4);
+      background: #fff1f2;
+      border: 2px dashed #fecdd3;
       border-radius: 22px;
       position: relative;
       overflow: hidden;
@@ -133,27 +140,35 @@
     }
     .balloon {
       position: absolute;
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       cursor: pointer;
       user-select: none;
       animation: floatUp 3s linear infinite;
-      transition: transform 0.1s;
     }
-    .balloon:active { transform: scale(1.3); }
-
     @keyframes floatUp {
       0% { bottom: -50px; opacity: 1; }
       100% { bottom: 220px; opacity: 0.8; }
     }
 
-    /* Music Control Button */
+    /* Secret Note Box */
+    .note-box {
+      background: #fffbeb;
+      border: 2px solid #fef08a;
+      padding: 18px;
+      border-radius: 20px;
+      width: 100%;
+      margin: 10px 0;
+      text-align: left;
+    }
+
+    /* Audio Toggle Button */
     .music-btn { 
-      background: rgba(255, 255, 255, 0.08); 
+      background: #fff1f2; 
       padding: 6px 14px; 
       border-radius: 20px; 
       font-size: 0.78rem; 
-      border: 1px solid rgba(255,255,255,0.15); 
-      color: var(--text-main); 
+      border: 1px solid #fecdd3; 
+      color: var(--accent); 
       cursor: pointer; 
       font-weight: 600;
       display: flex;
@@ -178,56 +193,57 @@
       </div>
 
       <button class="music-btn" onclick="toggleTune()">
-        <span id="musicIcon">🎵</span> <span id="musicText">Soothing Birthday Tune</span>
+        <span id="musicIcon">🎵</span> <span id="musicText">Soft Birthday Tune</span>
       </button>
     </div>
 
-    <!-- SLIDE 1: Intro -->
+    <!-- SLIDE 1: Gentle Aesthetic Welcome -->
     <div class="section active" id="slide1">
-      <div style="font-size: 3rem; margin-bottom: 10px;">👑✨</div>
-      <h1>Birthday Special</h1>
-      <p>Low-key mysterious vibe, super sharp mind & pure fitness enthusiast! Ready to check your story?</p>
+      <div style="font-size: 3rem; margin-bottom: 8px;">🌸✨</div>
+      <h1>Happy Birthday!</h1>
+      <p>Super smart, low-key mysterious & fitness lover! Ready for your birthday surprise?</p>
       
       <!-- Secure Client-Side Photo Frame -->
       <div class="photo-frame" onclick="document.getElementById('photoInput').click()">
         <img id="userPhotoPreview" style="display:none;" />
-        <span id="uploadHint" style="font-size: 0.85rem; color: var(--text-sub);">📷 Tap to add a Memory Photo<br><small style="font-size:0.7rem; color:#64748b;">(100% Secure - Stays in your browser)</small></span>
+        <span id="uploadHint" style="font-size: 0.85rem; color: var(--text-sub);">📷 Tap to add a Photo<br><small style="font-size:0.7rem; color:#94a3b8;">(100% Private - Stays on your phone)</small></span>
       </div>
       <input type="file" id="photoInput" accept="image/*" style="display:none;" onchange="loadPhoto(event)">
 
       <button class="btn" onclick="startStory(2)">Panna Palto ➔</button>
     </div>
 
-    <!-- SLIDE 2: Modified Traits (Gym, Smartness & Food Teasing) -->
+    <!-- SLIDE 2: Interactive Surprise Quiz (Guess the Right Traits) -->
     <div class="section" id="slide2">
-      <h2>The Bestie Vibe Checklist ⚡</h2>
+      <h2>Guess Your Secret Traits 🕵️‍♀️</h2>
+      <p style="margin-bottom: 8px;">Sahi option choose karo:</p>
       
-      <div class="wrapped-card">
-        <span class="wrapped-tag">TRAIT #1 • GYM FREAKER</span>
-        <div class="wrapped-title">"Mera Gym Ka Time Ho Gaya!" 🏋️‍♀️</div>
-        <div class="wrapped-desc">Kitna bhi busy din ho ya important kaam, gym ke routine ke sath koi compromise nahi! Pure dedication!</div>
+      <div class="quiz-card">
+        <div class="quiz-question">1. Daily routine ka sabse fixed part kya hai?</div>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="checkQuiz(1, false, 'Haha nahi! Gym routine miss hona impossible hai!')">A) Din bhar rest karna</div>
+          <div class="quiz-opt" onclick="checkQuiz(1, true, 'Correct! Gym ka time ho gaya = Unlimited Focus! 💪')">B) "Mera Gym Ka Time Ho Gaya!" 🏋️‍♀️</div>
+        </div>
+        <div class="quiz-feedback" id="fb1"></div>
       </div>
 
-      <div class="wrapped-card">
-        <span class="wrapped-tag">TRAIT #2 • MYSTERIOUS & SHARP</span>
-        <div class="wrapped-title">Quietly Intelligent 🧠</div>
-        <div class="wrapped-desc">Apni feelings shayad kam hi share karo, par mind ekdum sharp hai. Har baat bina bole samajhna aata hai!</div>
+      <div class="quiz-card">
+        <div class="quiz-question">2. Jab focus/kaam chal raha ho toh kya hota hai?</div>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="checkQuiz(2, false, 'Nahi re! Focus mein toh khana tak bhool jaati ho!')">A) Har 10 minute mein snack break</div>
+          <div class="quiz-opt" onclick="checkQuiz(2, true, 'Spot on! Full dedicated & sharp mind! 🧠')">B) Deep focus mein khana khana hi bhool jana</div>
+        </div>
+        <div class="quiz-feedback" id="fb2"></div>
       </div>
 
-      <div class="wrapped-card">
-        <span class="wrapped-tag">TRAIT #3 • FOOD Cravings</span>
-        <div class="wrapped-title">Focus Level: 100 🍕</div>
-        <div class="wrapped-desc">Apne kaam aur focus mein itni kho jaati ho ki kabhi kabhi khana khana hi bhool jaati ho!</div>
-      </div>
-
-      <button class="btn" onclick="nextSlide(3)">Pop Balloons ➔</button>
+      <button class="btn" id="btnQuizNext" style="display:none;" onclick="nextSlide(3)">Balloons Pop Karo ➔</button>
     </div>
 
     <!-- SLIDE 3: Balloon Pop Game -->
     <div class="section" id="slide3">
       <div style="font-size: 2.2rem; margin-bottom: 5px;">🎈</div>
       <h2>Pop the Birthday Balloons!</h2>
-      <p>Celebration unlock karne ke liye 3 balloons pop karo!</p>
+      <p>Celebration complete karne ke liye 3 balloons pop karo!</p>
 
       <div class="balloon-area" id="balloonArea">
         <div class="balloon" id="b1" style="left: 15%; animation-delay: 0s;" onclick="popBalloon('b1')">🎈</div>
@@ -235,23 +251,23 @@
         <div class="balloon" id="b3" style="left: 72%; animation-delay: 1.8s;" onclick="popBalloon('b3')">🎈</div>
       </div>
 
-      <p style="font-weight:700; color:var(--cyan); margin-top: 5px;">Popped: <span id="popScore">0</span> / 3</p>
+      <p style="font-weight:600; color:var(--purple); margin-top: 5px;">Popped: <span id="popScore">0</span> / 3</p>
 
       <button class="btn" id="btnGameNext" style="display:none; margin-top:10px;" onclick="nextSlide(4)">Bestfriend Note Unlock ➔</button>
     </div>
 
-    <!-- SLIDE 4: Bestfriend to Bestfriend Note (General & Pure) -->
+    <!-- SLIDE 4: Bestfriend Note (Normal Respectful & Warm Tone) -->
     <div class="section" id="slide4">
       <div style="font-size: 2.5rem; margin-bottom: 5px;">💌</div>
       <h2>Bestfriend Note</h2>
       
-      <div class="wrapped-card" style="border-color: rgba(244, 63, 94, 0.3); background: rgba(244, 63, 94, 0.06); padding: 18px;">
-        <p style="color: #f1f5f9; font-size: 0.93rem; line-height: 1.8; margin: 0; font-weight: 500;">
-          Tere sath baat karke hamesha ek super chill, genuine aur comfortable vibe aati hai. Tu jis tarah se har cheez ko calm, smart aur dedicatedly handle karti hai, wo sach mein bohot awesome hai! Thanks for being such an incredible best friend. Tu humesha aise hi cool, sorted aur amazing rehna! ✨🌸
+      <div class="note-box">
+        <p style="color: #334155; font-size: 0.93rem; line-height: 1.8; margin: 0; font-weight: 500;">
+          Tere sath baat karke hamesha ek super chill, sorted aur comfortable vibe aati hai. Tu jis tarah se har cheez ko calm, smart aur dedicatedly handle karti hai, wo sach mein bohot awesome hai! Thanks for being such a wonderful best friend. Aise hi hamesha cool, fit aur amazing rehna! ✨🌸
         </p>
       </div>
 
-      <button class="btn" style="margin-top: 15px;" onclick="nextSlide(5)">Cake & Wishes 🎂</button>
+      <button class="btn" style="margin-top: 10px;" onclick="nextSlide(5)">Cake & Celebration 🎂</button>
     </div>
 
     <!-- SLIDE 5: Final Celebration -->
@@ -259,16 +275,16 @@
       <div style="font-size: 3rem; margin-bottom: 10px;">🎂 🥂</div>
       <h1>Happy Birthday!</h1>
 
-      <div class="wrapped-card" style="text-align: center; margin: 15px 0; background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.3);">
-        <p style="color: #f8fafc; font-size: 0.93rem; line-height: 1.7; margin: 0; font-weight: 500;">
-          Wishing you a fantastic year filled with happiness, peace, great health, gym PRs, and endless good food! Have a wonderful day ahead! 🎉✨
+      <div class="note-box" style="text-align: center; margin: 15px 0; background: #fff1f2; border-color: #fecdd3;">
+        <p style="color: #334155; font-size: 0.93rem; line-height: 1.7; margin: 0; font-weight: 500;">
+          May this year bring you endless happiness, good health, gym gains, solved puzzles, and lots of delicious food! Have a wonderful day ahead! 🎉✨
         </p>
       </div>
 
       <button class="btn" onclick="triggerConfetti()">Celebrate Again 🎊</button>
     </div>
 
-    <div style="font-size:0.72rem; color:#475569; margin-top:10px;">Bestfriend Special Edition • Ultra Clean Vibe</div>
+    <div style="font-size:0.72rem; color:#94a3b8; margin-top:10px;">Soft Aesthetic Bestfriend Edition</div>
   </div>
 
   <script>
@@ -277,8 +293,9 @@
     let isPlaying = false;
     let timerId = null;
     let poppedCount = 0;
+    let quizSolved = { q1: false, q2: false };
 
-    // Soothing Birthday Chime Tune (Web Audio API)
+    // Soft Acoustic Chimes Birthday Melody (Web Audio API)
     const melodyNotes = [
       392.00, 392.00, 440.00, 392.00, 523.25, 493.88,
       392.00, 392.00, 440.00, 392.00, 587.33, 523.25,
@@ -290,9 +307,9 @@
       if(!audioCtx) return;
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
-      osc.type = 'sine'; // Pure acoustic sine wave
+      osc.type = 'sine'; // Pure gentle sine wave
       osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-      gain.gain.setValueAtTime(0.035, audioCtx.currentTime); // Perfect soft volume
+      gain.gain.setValueAtTime(0.035, audioCtx.currentTime); 
       gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.0);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
@@ -310,14 +327,14 @@
 
       if(!isPlaying) {
         isPlaying = true;
-        document.getElementById('musicText').innerText = "Playing Melody 🎶";
+        document.getElementById('musicText').innerText = "Playing Tune 🎶";
         timerId = setInterval(() => {
           playSoftNote(melodyNotes[noteIdx]);
           noteIdx = (noteIdx + 1) % melodyNotes.length;
         }, 450);
       } else {
         isPlaying = false;
-        document.getElementById('musicText').innerText = "Soothing Birthday Tune";
+        document.getElementById('musicText').innerText = "Soft Birthday Tune";
         clearInterval(timerId);
       }
     }
@@ -351,6 +368,25 @@
       if(slideNum === 5) triggerConfetti();
     }
 
+    // Quiz Check Logic
+    function checkQuiz(qNum, isCorrect, text) {
+      if(!isPlaying) toggleTune();
+      const fb = document.getElementById('fb' + qNum);
+      fb.innerText = text;
+      
+      if(isCorrect) {
+        fb.style.color = "#16a34a";
+        quizSolved['q' + qNum] = true;
+        confetti({ particleCount: 20, spread: 40, origin: { y: 0.6 } });
+      } else {
+        fb.style.color = "#dc2626";
+      }
+
+      if(quizSolved.q1 && quizSolved.q2) {
+        document.getElementById('btnQuizNext').style.display = 'block';
+      }
+    }
+
     // Balloon Pop Logic
     function popBalloon(id) {
       if(!isPlaying) toggleTune();
@@ -368,7 +404,7 @@
       }
     }
 
-    // Photo Preview Handler (100% Client-side local blob)
+    // Photo Preview Handler (100% Local Blob)
     function loadPhoto(event) {
       const file = event.target.files[0];
       if(file) {
