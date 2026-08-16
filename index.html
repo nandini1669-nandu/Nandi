@@ -3,164 +3,175 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Special Celebration for Priya Ji 🎂</title>
+  <title>A Special Surprise for Priya 🎂</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     :root {
-      --primary: #d4a373;
-      --accent: #f4a261;
-      --bg: #0f111a;
-      --card: #1a1d2e;
+      --primary: #ff4b72;
+      --accent: #ffd166;
+      --bg: #0b0c10;
+      --card: #1f2833;
       --text: #ffffff;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 15px; overflow-x: hidden; }
 
-    .app-container { width: 100%; max-width: 440px; background: var(--card); border-radius: 28px; padding: 25px; box-shadow: 0 20px 60px rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.1); position: relative; overflow: hidden; min-height: 580px; display: flex; flex-direction: column; justify-content: center; }
+    .app-container { width: 100%; max-width: 440px; background: var(--card); border-radius: 28px; padding: 25px; box-shadow: 0 20px 60px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); position: relative; overflow: hidden; min-height: 600px; display: flex; flex-direction: column; justify-content: center; }
 
-    .section { display: none; flex-direction: column; align-items: center; text-align: center; animation: fadeIn 0.5s ease; width: 100%; }
+    .section { display: none; flex-direction: column; align-items: center; text-align: center; animation: fadeIn 0.4s ease; width: 100%; }
     .section.active { display: flex; }
 
-    @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
 
     h1 { font-size: 1.8rem; margin-bottom: 12px; color: var(--accent); }
     h2 { font-size: 1.3rem; margin-bottom: 15px; color: #fff; }
-    p { font-size: 0.95rem; line-height: 1.6; color: #c0c5e0; margin-bottom: 20px; }
+    p { font-size: 0.95rem; line-height: 1.6; color: #c5c6c7; margin-bottom: 20px; }
 
-    .btn { background: linear-gradient(135deg, #e76f51, #f4a261); color: white; border: none; padding: 14px 24px; border-radius: 50px; font-weight: bold; font-size: 1rem; width: 100%; margin-top: 10px; cursor: pointer; transition: 0.2s; box-shadow: 0 8px 20px rgba(231, 111, 81, 0.3); }
+    .btn { background: linear-gradient(135deg, #ff4b72, #ff758c); color: white; border: none; padding: 14px 24px; border-radius: 50px; font-weight: bold; font-size: 1rem; width: 100%; margin-top: 10px; cursor: pointer; transition: 0.2s; box-shadow: 0 8px 20px rgba(255, 75, 114, 0.3); }
     .btn:active { transform: scale(0.96); }
 
     /* Interactive Balloons */
-    .balloon-grid { display: flex; justify-content: center; gap: 20px; margin: 25px 0; width: 100%; }
+    .balloon-grid { display: flex; justify-content: center; gap: 15px; margin: 20px 0; width: 100%; }
     .balloon-box { background: rgba(255,255,255,0.05); border: 1px dashed var(--accent); padding: 15px; border-radius: 18px; cursor: pointer; transition: 0.3s; flex: 1; }
-    .balloon-box:hover { background: rgba(244, 162, 97, 0.2); transform: translateY(-5px); }
-    .balloon-box span { font-size: 2.8rem; display: block; }
+    .balloon-box:hover { background: rgba(255, 209, 102, 0.2); transform: translateY(-5px); }
+    .balloon-box span { font-size: 2.5rem; display: block; }
 
-    .surprise-text { background: rgba(244, 162, 97, 0.15); border-radius: 12px; padding: 10px; font-size: 0.85rem; color: #ffe8d6; margin-top: 10px; min-height: 45px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--accent); }
+    .surprise-text { background: rgba(255, 209, 102, 0.15); border-radius: 12px; padding: 12px; font-size: 0.88rem; color: #ffe8d6; margin-top: 10px; min-height: 50px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--accent); }
 
     /* Quiz Options */
     .option-btn { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); padding: 14px; border-radius: 16px; width: 100%; margin-bottom: 10px; color: #fff; font-size: 0.9rem; text-align: left; cursor: pointer; transition: 0.2s; }
-    .option-btn:hover { background: rgba(244, 162, 97, 0.15); border-color: var(--accent); }
+    .option-btn:hover { background: rgba(255, 75, 114, 0.15); border-color: var(--primary); }
 
     /* Cake */
     .cake { font-size: 5.5rem; cursor: pointer; margin: 15px 0; position: relative; display: inline-block; }
     .candle { position: absolute; top: -12px; left: 42%; font-size: 1.8rem; animation: flicker 0.8s infinite alternate; }
     @keyframes flicker { 0% { opacity: 1; } 100% { opacity: 0.5; } }
 
-    /* Poetry Card */
-    .poetry-card { background: rgba(255,255,255,0.03); border-left: 3px solid var(--accent); border-right: 3px solid var(--accent); padding: 20px; border-radius: 16px; font-style: italic; color: #f1faee; font-size: 0.95rem; line-height: 1.8; margin: 15px 0; }
+    /* Shayari Card */
+    .shayari-card { background: rgba(255,255,255,0.03); border-left: 3px solid var(--primary); border-right: 3px solid var(--primary); padding: 20px; border-radius: 16px; font-style: italic; color: #f1faee; font-size: 0.95rem; line-height: 1.8; margin: 15px 0; }
 
-    /* Music Player Header */
-    .music-bar { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.5); padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; border: 1px solid rgba(255,255,255,0.1); color: var(--accent); display: flex; align-items: center; gap: 6px; }
+    /* Music Control Button */
+    .music-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,75,114,0.2); padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; border: 1px solid var(--primary); color: #fff; cursor: pointer; display: flex; align-items: center; gap: 6px; }
   </style>
 </head>
 <body>
 
   <div class="app-container">
-    <div class="music-bar">
-      <span>🎼</span> <span>Bollywood Melodies</span>
-    </div>
+    <button class="music-btn" onclick="toggleMusic()">
+      🎵 <span id="musicText">Play Soft Music</span>
+    </button>
 
-    <!-- Soft Instrumental Music -->
+    <!-- Reliable Soft Background Track -->
     <audio id="bgAudio" loop preload="auto">
-      <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73229.mp3?filename=soft-piano-bollywood-10781.mp3" type="audio/mpeg">
+      <source src="https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-493.mp3" type="audio/mpeg">
     </audio>
 
     <!-- SLIDE 1: Welcome & Balloon Pop Surprises -->
     <div class="section active" id="slide1">
       <div style="font-size: 3rem; margin-bottom: 10px;">✨ 🎈</div>
-      <h1>Aapka Swagat Hai, Priya Ji!</h1>
-      <p>Aapke is khaas din par kuch surprises aapke intezaar mein hain. Niche diye gaye **Balloons par click karke** unhe pop karein!</p>
+      <h1>Welcome Priya!</h1>
+      <p>Aapke birthday ke liye kuch secret mystery boxes hain. Niche diye **Balloons par tap karke** pop karein!</p>
 
       <div class="balloon-grid">
-        <div class="balloon-box" onclick="popBalloon(1, '🎨 Pure Artistic Soul!')">
+        <div class="balloon-box" onclick="popBalloon(1, '📊 Superwoman CA + Awesome Mom!')">
           <span>🎈</span>
         </div>
-        <div class="balloon-box" onclick="popBalloon(2, '☕ Coffee & High Energy!')">
+        <div class="balloon-box" onclick="popBalloon(2, '🎨 High Aesthetics & Fitness Freak!')">
           <span>🎈</span>
         </div>
-        <div class="balloon-box" onclick="popBalloon(3, '👑 Truly Inspiration!')">
+        <div class="balloon-box" onclick="popBalloon(3, '☕ 100% Passion & Positive Energy!')">
           <span>🎈</span>
         </div>
       </div>
 
       <div class="surprise-text" id="surpriseMsg">
-        Balloons par tap karke hidden messages unlock karein...
+        Tap on balloons to reveal secret superpowers...
       </div>
 
-      <button class="btn" id="btnSlide1" style="display:none; margin-top:20px;" onclick="nextSlide(2)">Aage Badhein ➔</button>
+      <button class="btn" id="btnSlide1" style="display:none; margin-top:15px;" onclick="nextSlide(2)">Aage Badhein ➔</button>
     </div>
 
-    <!-- SLIDE 2: Interactive Playful Quiz -->
+    <!-- SLIDE 2: Quiz with Unique Dynamic Wrong Responses -->
     <div class="section" id="slide2">
-      <h2>🧠 Quick Verification Test</h2>
-      <p>Aapko aage badhne ke liye sahi option pehchanna hoga!</p>
+      <h2>🧠 Verification Check</h2>
+      <p>Aapko aage badhne ke liye sahi option pehchanna padega!</p>
       
-      <p style="text-align:left; color:#fff; width:100%; margin-bottom:10px; font-weight:bold;">Sawaal: Aapki sabse badi qualities kya hain?</p>
+      <p style="text-align:left; color:#fff; width:100%; margin-bottom:10px; font-weight:bold;">Q: Priya ki sabse badi Superpower kya hai?</p>
       
-      <button class="option-btn" onclick="wrongOption()">A) Sirf strict senior ki tarah behave karna 🤐</button>
-      <button class="option-btn" onclick="wrongOption()">B) Pura din boring kaam karna 🥱</button>
-      <button class="option-btn" onclick="correctOption()">C) Perfect Style, Fitness Goals, Creative Artist & Inspiring Personality ✨</button>
+      <button class="option-btn" onclick="wrongOption(1)">A) Din bhar sirf balance sheet aur audit me khoye rehna 📊</button>
+      <button class="option-btn" onclick="wrongOption(2)">B) Baby care aur gym ke dar se rest lena 😴</button>
+      <button class="option-btn" onclick="correctOption()">C) CA Work, Baby Management, Gym Fitness & Art—sabr kuch effortlessly balance karna 🔥</button>
+      <button class="option-btn" onclick="wrongOption(3)">D) Sirf boring routine follow karna 🥱</button>
       
-      <p id="quizError" style="color:#ff6b6b; font-size:0.85rem; display:none; margin-top:5px;">Galat option! Aap itni boring nahi ho sakti, sahi option choose karein 😉</p>
+      <p id="quizError" style="color:#ff6b6b; font-size:0.85rem; display:none; margin-top:8px; font-weight:500;"></p>
     </div>
 
-    <!-- SLIDE 3: Deep Friendship Poetry -->
+    <!-- SLIDE 3: Deep Birthday & Friendship Shayari -->
     <div class="section" id="slide3">
       <div style="font-size: 2.5rem; margin-bottom: 10px;">📜 ✨</div>
       <h2>Khaas Aapke Liye...</h2>
 
-      <div class="poetry-card">
-        "Kuch rishte zindagi mein behad khaas hote hain,<br>
-        Jo door hokar bhi dil ke paas hote hain.<br>
-        Aapki maujoodgi se har lamha haseen lagta hai,<br>
-        Aap jaisa dost milna kismat ki baat hoti hai."
+      <div class="shayari-card">
+        "Khwahishon se bhari ho aapki har raah,<br>
+        Har khushi mile aapko bina kisi aah.<br>
+        CA ki sharpness ho, ya mom ka pyara andaaz,<br>
+        Aapki har ada par humko hai naaz.<br>
+        Janmdin ki khoobsurat mubarakbaad!"
       </div>
 
-      <p style="font-size:0.85rem;">Aapki guiding light aur inspiration hamesha aisi hi bane rahe!</p>
+      <p style="font-size:0.85rem;">Aap jaisi multi-talented aur inspiring person sach me rare hain!</p>
 
-      <button class="btn" onclick="nextSlide(4)">Birthday Ritual par Chalein 🎂</button>
+      <button class="btn" onclick="nextSlide(4)">Let's Cut The Cake 🎂</button>
     </div>
 
     <!-- SLIDE 4: Virtual Cake Cutting -->
     <div class="section" id="slide4">
-      <h2>🎂 Virtual Cake Cutting</h2>
-      <p>Aapke Birthday Cake ki candle bujhane ke liye **Cake par Tap Karein**!</p>
+      <h2>🎂 Time for Celebration!</h2>
+      <p>Candle bujhane aur celebration start karne ke liye **Cake par Tap Karein**!</p>
 
       <div class="cake" onclick="cutCake()">
         <span class="candle" id="flame">🔥</span>
         🎂
       </div>
 
-      <p style="font-size:0.85rem; color:var(--accent);">*Cake par click karein aur celebrations start karein!*</p>
+      <p style="font-size:0.85rem; color:var(--accent);">*Tap cake to blow flame & pop confetti!*</p>
     </div>
 
-    <!-- SLIDE 5: Respectful Final Wish -->
+    <!-- SLIDE 5: Clean English Special Birthday Message -->
     <div class="section" id="slide5">
       <div style="font-size: 3rem;">🥂 🎉</div>
-      <h1>HAPPY BIRTHDAY PRIYA JI!</h1>
+      <h1>HAPPY BIRTHDAY PRIYA!</h1>
 
-      <p style="text-align:left; background:rgba(255,255,255,0.03); padding:18px; border-radius:16px; border-left:3px solid var(--accent); font-size:0.92rem; line-height:1.7; color:#e0e0e0; margin:15px 0;">
-        Aapko Janamdin Ki Bahut Bahut Badhaiyan! 🌸<br><br>
-        Aap jaisi personality se bohot kuch seekhne ko milta hai. Aapka energetic nature, fitness ka dedication, aur artistic talent waqai inspiring hai.<br><br>
-        Dua hai ki yeh saal aapke liye bohot saari kamyabi, achhi health, aur khoobsurat moments lekar aaye. Hamesha aise hi muskurate rahein aur shine karte rahein! Have a fantastic day! 🌟✨
+      <p style="text-align:left; background:rgba(255,255,255,0.03); padding:18px; border-radius:16px; border-left:3px solid var(--primary); font-size:0.9rem; line-height:1.7; color:#e0e0e0; margin:15px 0;">
+        Wishing you a very Happy Birthday! 🌟<br><br>
+        It is truly inspiring to see how gracefully you handle everything—from your CA professional life and motherhood to your passion for fitness, art, and fashion. You genuinely make multitasking look so effortless.<br><br>
+        May this year bring you immense happiness, great health, unmatched success, and all the peace you deserve. Keep inspiring and shining bright as always! Have a wonderful year ahead! ✨
       </p>
 
-      <button class="btn" onclick="triggerConfetti()">Phir Se Confetti Udayein 🎊</button>
+      <button class="btn" onclick="triggerConfetti()">Blast Celebrations Again 🎊</button>
     </div>
   </div>
 
   <script>
     let poppedCount = 0;
     const bgAudio = document.getElementById('bgAudio');
+    let isPlaying = false;
 
-    function startAudio() {
-      bgAudio.play().catch(() => {});
+    function toggleMusic() {
+      if(!isPlaying) {
+        bgAudio.play();
+        document.getElementById('musicText').innerText = "Music Playing 🎶";
+        isPlaying = true;
+      } else {
+        bgAudio.pause();
+        document.getElementById('musicText').innerText = "Play Soft Music";
+        isPlaying = false;
+      }
     }
 
     function popBalloon(num, msg) {
-      startAudio();
-      document.getElementById('surpriseMsg').innerText = "Surprise: " + msg;
+      if(!isPlaying) toggleMusic();
+      document.getElementById('surpriseMsg').innerText = "Unlocked: " + msg;
       confetti({ particleCount: 25, spread: 50, origin: { y: 0.7 } });
       poppedCount++;
       
@@ -169,20 +180,29 @@
       }
     }
 
-    function wrongOption() {
-      startAudio();
-      document.getElementById('quizError').style.display = 'block';
+    function wrongOption(type) {
+      if(!isPlaying) toggleMusic();
+      const errorBox = document.getElementById('quizError');
+      errorBox.style.display = 'block';
+
+      if(type === 1) {
+        errorBox.innerText = "Wrong! Audit sheet ke alawa bhi wo gym, family aur art balance karti hain 😉";
+      } else if(type === 2) {
+        errorBox.innerText = "Nope! Baby aur gym ke saath uninterrupted energy maintain karna unka style hai 🔥";
+      } else {
+        errorBox.innerText = "Incorrect! Priya aur boring? Never! Sahi option choose karo 😜";
+      }
     }
 
     function correctOption() {
-      startAudio();
+      if(!isPlaying) toggleMusic();
       document.getElementById('quizError').style.display = 'none';
       confetti({ particleCount: 40, spread: 60, origin: { y: 0.6 } });
       setTimeout(() => nextSlide(3), 600);
     }
 
     function nextSlide(slideNum) {
-      startAudio();
+      if(!isPlaying) toggleMusic();
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       document.getElementById('slide' + slideNum).classList.add('active');
     }
