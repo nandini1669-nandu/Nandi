@@ -3,65 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bestie Birthday Edition ✨</title>
+  <title>For Priya ✨</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-start: #fdf2f8;
-      --bg-end: #f3e8ff;
-      --card-bg: #ffffff;
-      --accent: #f43f5e;
-      --accent-glow: rgba(244, 63, 94, 0.15);
-      --purple: #8b5cf6;
-      --text-main: #1e293b;
-      --text-sub: #64748b;
-      --border-color: #fbcfe8;
+      --bg: #fcf8f6;
+      --card: #ffffff;
+      --accent: #e07a5f;
+      --primary: #3d405b;
+      --subtext: #6c757d;
+      --soft-pink: #f4a261;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
-      background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
-      color: var(--text-main); 
+      background: linear-gradient(135deg, #fefae0 0%, #f4acb7 100%); 
+      color: var(--primary); 
       font-family: 'Plus Jakarta Sans', sans-serif;
       min-height: 100vh; 
       display: flex; 
       justify-content: center; 
       align-items: center; 
-      padding: 12px;
+      padding: 15px;
     }
 
     .app-container { 
       width: 100%; 
       max-width: 420px; 
-      background: var(--card-bg); 
-      border-radius: 32px; 
-      padding: 24px 20px; 
-      box-shadow: 0 20px 40px rgba(244, 63, 94, 0.08); 
+      background: var(--card); 
+      border-radius: 24px; 
+      padding: 28px 22px; 
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08); 
       position: relative; 
       overflow: hidden; 
-      min-height: 640px; 
+      min-height: 560px; 
       display: flex; 
       flex-direction: column; 
-      justify-content: space-between; 
-      border: 2px solid var(--border-color);
+      justify-content: center; 
     }
 
-    /* Progress Indicators */
-    .story-progress { display: flex; gap: 5px; margin-bottom: 16px; }
-    .progress-bar { height: 4px; flex: 1; background: #f1f5f9; border-radius: 4px; overflow: hidden; }
-    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #f43f5e, #a855f7); transition: width 0.3s ease; }
-
-    .section { display: none; flex-direction: column; align-items: center; text-align: center; animation: fadeIn 0.4s ease-out; width: 100%; flex-grow: 1; justify-content: center; }
+    .section { display: none; flex-direction: column; align-items: center; text-align: center; animation: fadeIn 0.5s ease; width: 100%; }
     .section.active { display: flex; }
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-    h1 { font-family: 'Fredoka', cursive; font-size: 2.1rem; color: var(--accent); margin-bottom: 8px; }
-    h2 { font-family: 'Fredoka', cursive; font-size: 1.4rem; color: var(--purple); margin-bottom: 10px; }
-    p { font-size: 0.92rem; line-height: 1.6; color: var(--text-sub); margin-bottom: 14px; }
+    h1 { font-family: 'Caveat', cursive; font-size: 2.6rem; color: var(--accent); margin-bottom: 8px; font-weight: 600; }
+    h2 { font-size: 1.25rem; margin-bottom: 12px; color: var(--primary); font-weight: 600; }
+    p { font-size: 0.95rem; line-height: 1.6; color: var(--subtext); margin-bottom: 20px; }
 
     .btn { 
-      background: linear-gradient(135deg, #f43f5e, #e11d48); 
+      background: var(--accent); 
       color: white; 
       border: none; 
       padding: 14px 24px; 
@@ -72,345 +63,293 @@
       margin-top: 10px; 
       cursor: pointer; 
       transition: all 0.2s ease;
-      box-shadow: 0 4px 15px var(--accent-glow);
+      box-shadow: 0 4px 15px rgba(224, 122, 95, 0.3);
     }
-    .btn:active { transform: scale(0.97); }
+    .btn:active { transform: scale(0.98); }
 
-    /* Interactive Quiz Box Style */
-    .quiz-card {
-      background: #faf5ff;
-      border: 1.5px solid #e9d5ff;
-      border-radius: 20px;
-      padding: 14px;
-      margin: 8px 0;
-      width: 100%;
-      text-align: left;
+    /* Interactive Cards */
+    .cards-grid { display: flex; gap: 10px; margin: 15px 0; width: 100%; }
+    .card-box { 
+      background: #fdf0ed; 
+      border: 1px solid #f8d7da; 
+      padding: 16px 10px; 
+      border-radius: 16px; 
+      cursor: pointer; 
+      transition: 0.3s; 
+      flex: 1; 
+      font-size: 1.8rem;
     }
-    .quiz-question { font-size: 0.9rem; font-weight: 700; color: #4c1d95; margin-bottom: 8px; }
-    .quiz-options { display: flex; flex-direction: column; gap: 8px; }
-    .quiz-opt {
-      background: #ffffff;
-      border: 1px solid #ddd6fe;
-      padding: 10px 12px;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      color: #334155;
-      font-weight: 500;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .quiz-opt:hover { background: #f3e8ff; border-color: #c084fc; }
-    .quiz-feedback {
-      font-size: 0.82rem;
-      margin-top: 6px;
-      font-weight: 600;
-      min-height: 18px;
-    }
+    .card-box:hover { transform: translateY(-3px); background: #f9ebea; }
 
-    /* Photo Frame Style Adjusted for Portrait Photo */
-    .photo-frame {
-      width: 100%;
-      height: 200px;
-      background: #fff1f2;
-      border: 2px solid #fecdd3;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
+    .surprise-text { 
+      background: #faf0ca; 
+      border-radius: 14px; 
+      padding: 14px; 
+      font-size: 0.9rem; 
+      color: #3d405b; 
+      margin-top: 10px; 
+      min-height: 60px; 
+      display: flex; 
+      align-items: center; 
       justify-content: center;
-      position: relative;
-      overflow: hidden;
-      margin: 10px 0;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      line-height: 1.5;
     }
-    .photo-frame img { 
+
+    /* Quiz Options */
+    .option-btn { 
+      background: #f8f9fa; 
+      border: 1px solid #e9ecef; 
+      padding: 13px 16px; 
+      border-radius: 14px; 
       width: 100%; 
-      height: 100%; 
-      object-fit: cover; 
-      object-position: center top; 
-      position: absolute; 
-      top: 0; 
-      left: 0; 
+      margin-bottom: 10px; 
+      color: var(--primary); 
+      font-size: 0.9rem; 
+      text-align: left; 
+      cursor: pointer; 
+      transition: 0.2s; 
+      font-weight: 500;
     }
+    .option-btn:hover { background: #fdf0ed; border-color: var(--accent); }
 
-    /* Balloon Area */
-    .balloon-area {
-      width: 100%;
-      height: 180px;
-      background: #fff1f2;
-      border: 2px dashed #fecdd3;
-      border-radius: 22px;
-      position: relative;
-      overflow: hidden;
-      margin: 10px 0;
-    }
-    .balloon {
-      position: absolute;
-      font-size: 2.6rem;
-      cursor: pointer;
-      user-select: none;
-      animation: floatUp 3s linear infinite;
-    }
-    @keyframes floatUp {
-      0% { bottom: -50px; opacity: 1; }
-      100% { bottom: 200px; opacity: 0.8; }
-    }
+    /* Cake */
+    .cake { font-size: 5rem; cursor: pointer; margin: 15px 0; position: relative; display: inline-block; }
+    .candle { position: absolute; top: -10px; left: 40%; font-size: 1.6rem; animation: float 1s infinite alternate; }
+    @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-4px); } }
 
-    /* Secret Note Box */
-    .note-box {
-      background: #fffbeb;
-      border: 2px solid #fef08a;
-      padding: 18px;
-      border-radius: 20px;
-      width: 100%;
-      margin: 10px 0;
+    /* Shayari/Note Card */
+    .note-card { 
+      background: #fdf0ed; 
+      border-left: 4px solid var(--accent); 
+      padding: 18px; 
+      border-radius: 12px; 
+      font-style: italic; 
+      color: #3d405b; 
+      font-size: 0.95rem; 
+      line-height: 1.8; 
+      margin: 15px 0; 
       text-align: left;
     }
 
-    /* Audio Toggle Button */
+    /* Music Control */
     .music-btn { 
-      background: #fff1f2; 
-      padding: 6px 14px; 
+      position: absolute; 
+      top: 18px; 
+      right: 18px; 
+      background: #fdf0ed; 
+      padding: 6px 12px; 
       border-radius: 20px; 
-      font-size: 0.78rem; 
-      border: 1px solid #fecdd3; 
+      font-size: 0.75rem; 
+      border: 1px solid #f8d7da; 
       color: var(--accent); 
       cursor: pointer; 
       font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 6px;
-      align-self: flex-end;
-      margin-bottom: 10px;
+      gap: 5px;
     }
   </style>
 </head>
 <body>
 
   <div class="app-container">
-    <div>
-      <div class="story-progress">
-        <div class="progress-bar" id="p1"><div class="progress-fill"></div></div>
-        <div class="progress-bar" id="p2"><div class="progress-fill"></div></div>
-        <div class="progress-bar" id="p3"><div class="progress-fill"></div></div>
-        <div class="progress-bar" id="p4"><div class="progress-fill"></div></div>
-        <div class="progress-bar" id="p5"><div class="progress-fill"></div></div>
-      </div>
+    <button class="music-btn" onclick="toggleMusic()">
+      <span id="musicIcon">🎵</span> <span id="musicText">Play Soft Music</span>
+    </button>
 
-      <button class="music-btn" onclick="toggleTune()">
-        <span id="musicIcon">🎵</span> <span id="musicText">Original Birthday Tune</span>
-      </button>
-    </div>
-
-    <!-- SLIDE 1: Intro with Fixed Photo -->
+    <!-- SLIDE 1: Gentle Welcome & Tap to Reveal -->
     <div class="section active" id="slide1">
-      <div style="font-size: 3rem; margin-bottom: 8px;">🌸✨</div>
-      <h1>Happy Birthday!</h1>
-      <p>Super smart, low-key genius & gym freak! Ready for your surprise?</p>
-      
-      <div class="photo-frame">
-        <img src="photo.jpg" alt="Birthday Photo" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1513151233558-d860c5398176?w=500';">
+      <div style="font-size: 2.2rem; margin-bottom: 5px;">🌷</div>
+      <h1>Hey Priya!</h1>
+      <p>Tumhare birthday ke liye ek chota sa surprise banaya hai. Niche diye envelope cards par tap karo!</p>
+
+      <div class="cards-grid">
+        <div class="card-box" onclick="popCard(1, 'Always bringing warmth & good vibes wherever you go! ✨')">
+          ✉️
+        </div>
+        <div class="card-box" onclick="popCard(2, 'Super dependable, kind-hearted & grounded person! 🤍')">
+          💌
+        </div>
+        <div class="card-box" onclick="popCard(3, 'The one who quietly manages everything like a absolute rockstar! 🌸')">
+          🎁
+        </div>
       </div>
 
-      <button class="btn" onclick="startStory(2)">Panna Palto ➔</button>
+      <div class="surprise-text" id="surpriseMsg">
+        Tap on any card to open a note...
+      </div>
+
+      <button class="btn" id="btnSlide1" style="display:none; margin-top:15px;" onclick="nextSlide(2)">Aage Chalo ➔</button>
     </div>
 
-    <!-- SLIDE 2: NEW TWISTED QUESTIONS -->
+    <!-- SLIDE 2: Fun Quiz with Unique Friendly Responses -->
     <div class="section" id="slide2">
-      <h2>Guess Your Secret Traits 🕵️‍♀️</h2>
+      <h2>Ek Chota Sa Truth Check 😄</h2>
+      <p>Aage badhne ke liye sahi answer choose karna mandatory hai!</p>
       
-      <div class="quiz-card">
-        <div class="quiz-question">1. Fitness dedication level kitna high hai?</div>
-        <div class="quiz-options">
-          <div class="quiz-opt" onclick="checkQuiz(1, false, 'Haha bilkul nahi! Gym ke time koi disturbance nahi chahiye!')">A) Lazily kabhi-kabhi exercise kar lena</div>
-          <div class="quiz-opt" onclick="checkQuiz(1, true, 'Sahi Pakde! Routine hit hona hi chahiye! 💪🔥')">B) "Gym ka time fix hai, no excuses allowed!"</div>
-        </div>
-        <div class="quiz-feedback" id="fb1"></div>
-      </div>
-
-      <div class="quiz-card">
-        <div class="quiz-question">2. Problem solving aur focus ka kya raaz hai?</div>
-        <div class="quiz-options">
-          <div class="quiz-opt" onclick="checkQuiz(2, false, 'Galat answer! Panic toh door door tak nahi hota!')">A) Thoda sa tension lete hi panic kar jana</div>
-          <div class="quiz-opt" onclick="checkQuiz(2, true, 'Exactly! Extremely calm, composed & sharp mind! 🧠✨')">B) Quietly problem samajhna aur silently solve kar dena</div>
-        </div>
-        <div class="quiz-feedback" id="fb2"></div>
-      </div>
-
-      <button class="btn" id="btnQuizNext" style="display:none;" onclick="nextSlide(3)">Balloons Pop Karo ➔</button>
+      <p style="text-align:left; color:var(--primary); width:100%; margin-bottom:12px; font-weight:600; font-size:0.95rem;">Q: Priya ki sabse unique baat kya hai?</p>
+      
+      <button class="option-btn" onclick="wrongOption(1)">A) Subah se shaam tak sirf kaam ki baatein karna 📄</button>
+      <button class="option-btn" onclick="wrongOption(2)">B) Har choti baat pe tension lena aur panic karna 🙈</button>
+      <button class="option-btn" onclick="correctOption()">C) Bilkul calm rehkar sab sambhalna & bina show-off kiye sabki care karna ✨</button>
+      <button class="option-btn" onclick="wrongOption(3)">D) Har waqt bas sote rehna 😴</button>
+      
+      <p id="quizError" style="color:#d9534f; font-size:0.85rem; display:none; margin-top:10px; font-weight:500; line-height:1.4;"></p>
     </div>
 
-    <!-- SLIDE 3: Balloon Game -->
+    <!-- SLIDE 3: Genuine Friendship Shayari -->
     <div class="section" id="slide3">
-      <div style="font-size: 2.2rem; margin-bottom: 5px;">🎈</div>
-      <h2>Pop the Birthday Balloons!</h2>
-      <p>3 balloons pop karke aage badho:</p>
+      <div style="font-size: 2rem; margin-bottom: 5px;">📜</div>
+      <h2>Khaas Tumhare Liye...</h2>
 
-      <div class="balloon-area" id="balloonArea">
-        <div class="balloon" id="b1" style="left: 15%; animation-delay: 0s;" onclick="popBalloon('b1')">🎈</div>
-        <div class="balloon" id="b2" style="left: 45%; animation-delay: 1s;" onclick="popBalloon('b2')">🎈</div>
-        <div class="balloon" id="b3" style="left: 72%; animation-delay: 1.8s;" onclick="popBalloon('b3')">🎈</div>
+      <div class="note-card">
+        "Dil se saaf aur baaton mein mithas ho tum,<br>
+        Kuch logon mein sabse khas ho tum.<br>
+        Khushiyaan mile tumhein duniya ki tamaam,<br>
+        Har din tumhara khoobsurat ho aur haseen ho har shaam."
       </div>
 
-      <p style="font-weight:600; color:var(--purple); margin-top: 5px;">Popped: <span id="popScore">0</span> / 3</p>
+      <p style="font-size:0.9rem;">Dost ho toh tum jaisi! Simple, sweet and truly genuine.</p>
 
-      <button class="btn" id="btnGameNext" style="display:none; margin-top:10px;" onclick="nextSlide(4)">Bestfriend Note Unlock ➔</button>
+      <button class="btn" onclick="nextSlide(4)">Cake Cut Karte Hain 🎂</button>
     </div>
 
-    <!-- SLIDE 4: REVISED BESTFRIEND NOTE -->
+    <!-- SLIDE 4: Virtual Cake Cutting -->
     <div class="section" id="slide4">
-      <div style="font-size: 2.5rem; margin-bottom: 5px;">💌</div>
-      <h2>Bestfriend Note</h2>
-      
-      <div class="note-box">
-        <p style="color: #334155; font-size: 0.93rem; line-height: 1.8; margin: 0; font-weight: 500;">
-          Tere sath baate karna hamesha bohot easy, light aur comfortable lagta hai. Jis tarah tu apni gym consistency, sharp intelligence aur calm mindset ko balance karti hai, wo truly inspiring hai! Thanks for being such a sweet, reliable aur cool best friend. Wish you all the happiness, success aur unlimited good vibes this year! ✨🌸
-        </p>
+      <h2>🎂 Make a Wish!</h2>
+      <p>Candle bujhane aur surprise ke liye **Cake par tap karo**!</p>
+
+      <div class="cake" onclick="cutCake()">
+        <span class="candle" id="flame">🕯️</span>
+        🎂
       </div>
 
-      <button class="btn" style="margin-top: 10px;" onclick="nextSlide(5)">Cake & Celebration 🎂</button>
+      <p style="font-size:0.85rem; color:var(--accent); font-weight:500;">*Tap the cake to blow the candle!*</p>
     </div>
 
-    <!-- SLIDE 5: Finale -->
+    <!-- SLIDE 5: Warm & Personal English Message -->
     <div class="section" id="slide5">
-      <div style="font-size: 3rem; margin-bottom: 10px;">🎂 🥂</div>
-      <h1>Happy Birthday!</h1>
+      <div style="font-size: 2.5rem; margin-bottom: 5px;">🌸 🎉</div>
+      <h1 style="font-size: 2.2rem;">Happy Birthday, Priya!</h1>
 
-      <div class="note-box" style="text-align: center; margin: 15px 0; background: #fff1f2; border-color: #fecdd3;">
-        <p style="color: #334155; font-size: 0.93rem; line-height: 1.7; margin: 0; font-weight: 500;">
-          May this year bring you endless happiness, gym PRs, achievements, peace, and lots of delicious treats! Have the happiest birthday ahead! 🎉✨
-        </p>
+      <div style="text-align:left; background:#faf8f5; padding:18px; border-radius:16px; border:1px solid #f0e6df; font-size:0.9rem; line-height:1.7; color:#4a4e69; margin:15px 0;">
+        Wish you a wonderful Birthday! 🎂✨<br><br>
+        Just wanted to take a moment to tell you how awesome you are. The way you handle everything in life with a smile, keep your loved ones happy, and stay so grounded is truly admirable.<br><br>
+        I hope this coming year brings you peace, lots of happy moments, good health, and all the success you wish for. Stay blessed and keep spreading your positive vibe!<br><br>
+        Have a wonderful day ahead! 🥂
       </div>
 
       <button class="btn" onclick="triggerConfetti()">Celebrate Again 🎊</button>
     </div>
-
-    <div style="font-size:0.72rem; color:#94a3b8; margin-top:10px;">Bestfriend Edition • Soft Aesthetic</div>
   </div>
 
   <script>
-    let currentSlide = 1;
+    let poppedCount = 0;
     let audioCtx = null;
     let isPlaying = false;
-    let timerId = null;
-    let poppedCount = 0;
-    let quizSolved = { q1: false, q2: false };
+    let musicInterval = null;
 
-    // Continuous Original Birthday Melody
-    const melodyNotes = [
-      261.63, 261.63, 293.66, 261.63, 349.23, 329.63,
-      261.63, 261.63, 293.66, 261.63, 392.00, 349.23,
-      261.63, 261.63, 523.25, 440.00, 349.23, 329.63, 293.66,
-      466.16, 466.16, 440.00, 349.23, 392.00, 349.23
-    ];
-    let noteIdx = 0;
-
-    function initAudio() {
-      if(!audioCtx) {
+    // Built-in Soft Synth Audio Player (Bypasses all link block issues)
+    function startSoftMusic() {
+      if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
-      if(audioCtx.state === 'suspended') {
+      if (audioCtx.state === 'suspended') {
         audioCtx.resume();
       }
-    }
 
-    function playNote(freq) {
-      try {
-        initAudio();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.05, audioCtx.currentTime); 
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.45);
+      const notes = [
+        261.63, 261.63, 293.66, 261.63, 349.23, 329.63,
+        261.63, 261.63, 293.66, 261.63, 392.00, 349.23,
+        261.63, 261.63, 523.25, 440.00, 349.23, 329.63, 293.66
+      ];
+      let step = 0;
+
+      isPlaying = true;
+      document.getElementById('musicText').innerText = "Music On 🎶";
+
+      musicInterval = setInterval(() => {
+        if (!isPlaying) return;
+        let osc = audioCtx.createOscillator();
+        let gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(notes[step], audioCtx.currentTime);
+        
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+
         osc.connect(gain);
         gain.connect(audioCtx.destination);
+
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.45);
-      } catch(e) {}
+        osc.stop(audioCtx.currentTime + 0.8);
+
+        step = (step + 1) % notes.length;
+      }, 500);
     }
 
-    function ensureMusicPlaying() {
-      if(!isPlaying) {
-        isPlaying = true;
-        document.getElementById('musicText').innerText = "Playing Original Tune 🎶";
-        if(timerId) clearInterval(timerId);
-        timerId = setInterval(() => {
-          playNote(melodyNotes[noteIdx]);
-          noteIdx = (noteIdx + 1) % melodyNotes.length;
-        }, 300);
-      }
-    }
-
-    function toggleTune() {
-      if(!isPlaying) {
-        ensureMusicPlaying();
+    function toggleMusic() {
+      if (!isPlaying) {
+        startSoftMusic();
       } else {
         isPlaying = false;
-        document.getElementById('musicText').innerText = "Original Birthday Tune";
-        if(timerId) clearInterval(timerId);
+        clearInterval(musicInterval);
+        document.getElementById('musicText').innerText = "Play Soft Music";
       }
     }
 
-    function startStory(slide) {
-      ensureMusicPlaying();
-      nextSlide(slide);
+    function ensureMusic() {
+      if (!isPlaying) {
+        startSoftMusic();
+      }
+    }
+
+    function popCard(num, msg) {
+      ensureMusic();
+      document.getElementById('surpriseMsg').innerText = msg;
+      confetti({ particleCount: 20, spread: 40, origin: { y: 0.7 } });
+      poppedCount++;
+      if(poppedCount >= 2) {
+        document.getElementById('btnSlide1').style.display = 'block';
+      }
+    }
+
+    function wrongOption(type) {
+      ensureMusic();
+      const errorBox = document.getElementById('quizError');
+      errorBox.style.display = 'block';
+
+      if(type === 1) {
+        errorBox.innerText = "Haha galat! Sirf kaam ki baat? Priya se chill aur friendly baatein bhi khoob hoti hain 😜";
+      } else if(type === 2) {
+        errorBox.innerText = "Arey nahi! Panic hona toh unki list mein hi nahi hai, bohot calm rehne wali vibe hai 🌸";
+      } else {
+        errorBox.innerText = "Aisa bilkul nahi hai! Active rehna unka daily routine hai 🏃‍♀️ Try again!";
+      }
+    }
+
+    function correctOption() {
+      ensureMusic();
+      document.getElementById('quizError').style.display = 'none';
+      confetti({ particleCount: 40, spread: 60, origin: { y: 0.6 } });
+      setTimeout(() => nextSlide(3), 500);
     }
 
     function nextSlide(slideNum) {
-      ensureMusicPlaying();
-      currentSlide = slideNum;
-
-      for(let i = 1; i <= 5; i++) {
-        const bar = document.getElementById('p' + i);
-        if(bar) {
-          if(i <= slideNum) bar.querySelector('.progress-fill').style.width = '100%';
-          else bar.querySelector('.progress-fill').style.width = '0%';
-        }
-      }
-
+      ensureMusic();
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      const activeSlide = document.getElementById('slide' + slideNum);
-      if(activeSlide) activeSlide.classList.add('active');
-
-      if(slideNum === 5) triggerConfetti();
+      document.getElementById('slide' + slideNum).classList.add('active');
     }
 
-    function checkQuiz(qNum, isCorrect, text) {
-      ensureMusicPlaying();
-      const fb = document.getElementById('fb' + qNum);
-      fb.innerText = text;
-      
-      if(isCorrect) {
-        fb.style.color = "#16a34a";
-        quizSolved['q' + qNum] = true;
-        try { confetti({ particleCount: 20, spread: 40, origin: { y: 0.6 } }); } catch(e){}
-      } else {
-        fb.style.color = "#dc2626";
-      }
-
-      if(quizSolved.q1 && quizSolved.q2) {
-        document.getElementById('btnQuizNext').style.display = 'block';
-      }
-    }
-
-    function popBalloon(id) {
-      ensureMusicPlaying();
-      const b = document.getElementById(id);
-      if(b.style.visibility === 'hidden') return;
-
-      b.style.visibility = 'hidden';
-      poppedCount++;
-      document.getElementById('popScore').innerText = poppedCount;
-
-      try { confetti({ particleCount: 25, spread: 50, origin: { y: 0.6 } }); } catch(e){}
-
-      if(poppedCount >= 3) {
-        document.getElementById('btnGameNext').style.display = 'block';
-      }
+    function cutCake() {
+      ensureMusic();
+      document.getElementById('flame').style.display = 'none';
+      confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 } });
+      setTimeout(() => nextSlide(5), 1000);
     }
 
     function triggerConfetti() {
-      try { confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } }); } catch(e){}
+      confetti({ particleCount: 180, spread: 90, origin: { y: 0.6 } });
     }
   </script>
 </body>
