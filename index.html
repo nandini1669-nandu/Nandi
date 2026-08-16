@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Priya's Birthday Pass 🎫</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; }
+    body { background: #0d0d11; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
+
+    .story-card { width: 100%; max-width: 380px; height: 650px; background: linear-gradient(135deg, #1f1c2c, #928dab); border-radius: 24px; padding: 25px; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 2px solid rgba(255,255,255,0.1); }
+    
+    /* Progress Bar */
+    .progress-bar { display: flex; gap: 6px; margin-bottom: 20px; }
+    .progress-step { flex: 1; height: 4px; background: rgba(255,255,255,0.3); border-radius: 2px; }
+    .progress-step.active { background: #ff477e; box-shadow: 0 0 10px #ff477e; }
+
+    /* Content Slides */
+    .slide { display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; height: 100%; animation: fadeIn 0.4s ease-in-out; }
+    .slide.active { display: flex; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+    h1 { font-size: 1.8rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+    p { font-size: 1.1rem; line-height: 1.5; color: #f0f0f0; margin-bottom: 20px; }
+
+    /* Meme Box & Buttons */
+    .box { background: rgba(0,0,0,0.4); border: 2px dashed #ff477e; padding: 15px; border-radius: 16px; margin: 15px 0; width: 100%; }
+    .btn { background: #ff477e; color: white; border: none; padding: 14px 28px; border-radius: 50px; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 71, 126, 0.4); width: 100%; transition: 0.2s; }
+    .btn:active { transform: scale(0.95); }
+
+    .tag { display: inline-block; background: #ffeaa7; color: #000; font-weight: bold; padding: 5px 12px; border-radius: 12px; margin: 4px; font-size: 0.9rem; transform: rotate(-2deg); }
+    .tag:nth-child(even) { transform: rotate(3deg); background: #ff7675; color: white; }
+  </style>
+</head>
+<body>
+
+  <div class="story-card">
+    <!-- Progress Indicator -->
+    <div class="progress-bar">
+      <div class="progress-step active" id="p1"></div>
+      <div class="progress-step" id="p2"></div>
+      <div class="progress-step" id="p3"></div>
+    </div>
+
+    <!-- SLIDE 1: The Warning -->
+    <div class="slide active" id="slide1">
+      <div style="font-size: 4rem;">🚨</div>
+      <h1>HOLD UP PRIYA!</h1>
+      <p>Is page par aage badhne se pehle Identity Verification zaroori hai.</p>
+      
+      <div class="box">
+        <p style="margin:0; font-weight:bold;">Sahi option select kar 👇</p>
+      </div>
+
+      <button class="btn" onclick="nextSlide(2)">Main Coffee Addict + Gym Freak Priya hu ☕🏋️‍♀️</button>
+      <button class="btn" style="background:#444; margin-top:10px;" onclick="alert('Jhooth mat bol! Sahi button daba 😜')">Main Ek Normal Insan Hu 🗿</button>
+    </div>
+
+    <!-- SLIDE 2: The Roast & Vibe Check -->
+    <div class="slide" id="slide2">
+      <div style="font-size: 3.5rem;">💅</div>
+      <h1>Vibe Check Passed!</h1>
+      <p>System analysis according to data:</p>
+      
+      <div style="margin: 15px 0;">
+        <span class="tag">🎨 Full-Time Artist</span>
+        <span class="tag">👗 Fashionista Diva</span>
+        <span class="tag">🌶️ Sweet & Spicy</span>
+        <span class="tag">⚡ Live In The Moment</span>
+        <span class="tag">☕ 99% Coffee Battery</span>
+      </div>
+
+      <div class="box">
+        <p style="margin:0; font-size: 0.95rem;">Diagnosis: Sabse over-dramatic aur best friend zone me top tier bandi! ✨</p>
+      </div>
+
+      <button class="btn" onclick="nextSlide(3)">Main Surprise Unlock Kar Rahi Hu 🎁</button>
+    </div>
+
+    <!-- SLIDE 3: The Big Birthday Wish -->
+    <div class="slide" id="slide3">
+      <div style="font-size: 4rem;">🎂 🎉</div>
+      <h1>HAPPY BIRTHDAY PRIYA!</h1>
+      
+      <p>Wishing you endless coffee, zero gym slumps, and a year full of aesthetics & pure chaotic energy!</p>
+
+      <div class="box" style="border-style: solid; background: rgba(255,255,255,0.1);">
+        <p style="margin:0; font-size:0.95rem; font-style:italic;">"Tere jaisi aesthetic aur insane friend ka hona blessing hai bhai. Keep shining & slaying! 🔥"</p>
+      </div>
+
+      <button class="btn" onclick="triggerConfetti()" style="background:#00b894;">Blast Confetti 🎊</button>
+    </div>
+  </div>
+
+  <script>
+    function nextSlide(slideNumber) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.progress-step').forEach(p => p.classList.remove('active'));
+
+      document.getElementById('slide' + slideNumber).classList.add('active');
+      
+      for(let i=1; i<=slideNumber; i++){
+        document.getElementById('p' + i).classList.add('active');
+      }
+
+      if(slideNumber === 3) {
+        triggerConfetti();
+      }
+    }
+
+    function triggerConfetti() {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
+  </script>
+</body>
+</html>
